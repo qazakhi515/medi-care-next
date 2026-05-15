@@ -12,10 +12,11 @@ import { userVar } from '../../../apollo/store';
 
 interface TrendPropertyCardProps {
 	property: Property;
+	likePropertyHandler: any;
 }
 
 const TrendPropertyCard = (props: TrendPropertyCardProps) => {
-	const { property } = props;
+	const { property, likePropertyHandler } = props;
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
