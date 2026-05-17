@@ -9,6 +9,9 @@ import AgentCard from '../../libs/components/common/AgentCard';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Member } from '../../libs/types/member/member';
+import { useQuery } from '@apollo/client';
+import { GET_AGENTS } from '../../apollo/user/query';
+import { T } from '../../libs/types/common';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -32,6 +35,16 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 	const [searchText, setSearchText] = useState<string>('');
 
 	/** APOLLO REQUESTS **/
+	useQuery(GET_AGENTS, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: searchFilter },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setAgents(data?.getAgents?.list || []);
+			setTotal(data?.getAgents?.metaCounter?.[0]?.total || 0);
+		},
+	});
+
 	/** LIFECYCLES **/
 	useEffect(() => {
 		if (router.query.input) {
@@ -55,26 +68,31 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 	};
 
 	const sortingHandler = (e: React.MouseEvent<HTMLLIElement>) => {
+		let nextFilter = { ...searchFilter };
 		switch (e.currentTarget.id) {
 			case 'recent':
-				setSearchFilter({ ...searchFilter, sort: 'createdAt', direction: 'DESC' });
+				nextFilter = { ...searchFilter, sort: 'createdAt', direction: 'DESC' };
 				setFilterSortName('Recent');
 				break;
 			case 'old':
-				setSearchFilter({ ...searchFilter, sort: 'createdAt', direction: 'ASC' });
+				nextFilter = { ...searchFilter, sort: 'createdAt', direction: 'ASC' };
 				setFilterSortName('Oldest order');
 				break;
 			case 'likes':
-				setSearchFilter({ ...searchFilter, sort: 'memberLikes', direction: 'DESC' });
+				nextFilter = { ...searchFilter, sort: 'memberLikes', direction: 'DESC' };
 				setFilterSortName('Likes');
 				break;
 			case 'views':
-				setSearchFilter({ ...searchFilter, sort: 'memberViews', direction: 'DESC' });
+				nextFilter = { ...searchFilter, sort: 'memberViews', direction: 'DESC' };
 				setFilterSortName('Views');
 				break;
 		}
+		setSearchFilter(nextFilter);
 		setSortingOpen(false);
 		setAnchorEl2(null);
+		router.push(`/agent?input=${JSON.stringify(nextFilter)}`, `/agent?input=${JSON.stringify(nextFilter)}`, {
+			scroll: false,
+		});
 	};
 
 	const paginationChangeHandler = async (event: ChangeEvent<unknown>, value: number) => {
@@ -100,9 +118,14 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 								onChange={(e: any) => setSearchText(e.target.value)}
 								onKeyDown={(event: any) => {
 									if (event.key == 'Enter') {
-										setSearchFilter({
+										const nextFilter = {
 											...searchFilter,
+											page: 1,
 											search: { ...searchFilter.search, text: searchText },
+										};
+										setSearchFilter(nextFilter);
+										router.push(`/agent?input=${JSON.stringify(nextFilter)}`, `/agent?input=${JSON.stringify(nextFilter)}`, {
+											scroll: false,
 										});
 									}
 								}}
