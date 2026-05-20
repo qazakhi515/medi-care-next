@@ -130,7 +130,7 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 		return <h1>PROPERTIES MOBILE</h1>;
 	} else {
 		return (
-			<div id="property-list-page" style={{ position: 'relative' }}>
+			<div id="property-list-page">
 				<div className="container">
 					<Box component={'div'} className={'right'}>
 						<span>Sort by</span>
