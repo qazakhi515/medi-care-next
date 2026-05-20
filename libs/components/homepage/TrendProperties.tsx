@@ -45,15 +45,12 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 	const likePropertyHandler = async (user: T, id: string) => {
 		try {
 			if (!id) return;
-			if (!user._id) throw new Error(Message.SOMETHING_WENT_WRONG);
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
 			await likeTargetProperty({
 				variables: { input: id },
 			});
 
 			await getPropertiesRefetch({ input: initialInput });
-			// execute likeTargetProperty Mutation
-			// execute getPropertiesRefetch
-
 			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			console.log('ERROR, likePropertyHandler:', err.message);
