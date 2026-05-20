@@ -9,9 +9,12 @@ import AgentCard from '../../libs/components/common/AgentCard';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Member } from '../../libs/types/member/member';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_AGENTS } from '../../apollo/user/query';
 import { T } from '../../libs/types/common';
+import { LIKE_TARGET_MEMBER } from '../../apollo/user/mutation';
+import { Messages } from '../../libs/config';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -35,13 +38,20 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 	const [searchText, setSearchText] = useState<string>('');
 
 	/** APOLLO REQUESTS **/
-	useQuery(GET_AGENTS, {
-		fetchPolicy: 'cache-and-network',
+	const [likeTargetMember] = useMutation(LIKE_TARGET_MEMBER);
+
+	const {
+		loading: getAgentsLoading,
+		data: getAgentsData,
+		error: getAgentsError,
+		refetch: getAgentsRefetch,
+	} = useQuery(GET_AGENTS, {
+		fetchPolicy: 'network-only',
 		variables: { input: searchFilter },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setAgents(data?.getAgents?.list || []);
-			setTotal(data?.getAgents?.metaCounter?.[0]?.total || 0);
+			setAgents(data?.getAgents?.list);
+			setTotal(data?.getAgents?.metaCounter[0]?.total);
 		},
 	});
 
@@ -103,6 +113,24 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 		setCurrentPage(value);
 	};
 
+	const likeMemberHandler = async (user: any, id: string) => {
+		try {
+			if (!id) return;
+			if (!user._id) throw new Error(Messages.error2);
+
+			await likeTargetMember({
+				variables: {
+					input: id,
+				},
+			});
+
+			await getAgentsRefetch({ input: searchFilter });
+			await sweetTopSmallSuccessAlert('success', 800);
+		} catch (err: any) {
+			console.log('ERROR, likePropertyHandler:', err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
 	if (device === 'mobile') {
 		return <h1>AGENTS PAGE MOBILE</h1>;
 	} else {
@@ -118,14 +146,9 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 								onChange={(e: any) => setSearchText(e.target.value)}
 								onKeyDown={(event: any) => {
 									if (event.key == 'Enter') {
-										const nextFilter = {
+										setSearchFilter({
 											...searchFilter,
-											page: 1,
 											search: { ...searchFilter.search, text: searchText },
-										};
-										setSearchFilter(nextFilter);
-										router.push(`/agent?input=${JSON.stringify(nextFilter)}`, `/agent?input=${JSON.stringify(nextFilter)}`, {
-											scroll: false,
 										});
 									}
 								}}
@@ -162,7 +185,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 							</div>
 						) : (
 							agents.map((agent: Member) => {
-								return <AgentCard agent={agent} key={agent._id} />;
+								return <AgentCard agent={agent} key={agent._id} likeMemberHandler={likeMemberHandler} />;
 							})
 						)}
 					</Stack>
