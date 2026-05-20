@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Box, Button, Checkbox, Stack, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import { NextPage } from 'next';
@@ -68,13 +68,13 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 		error: getPropertyError,
 		refetch: geetPropertyRefetch,
 	} = useQuery(GET_PROPERTY, {
-		fetchPolicy: 'cache-and-network',
+		fetchPolicy: 'network-only',
 		variables: { input: propertyId },
 		skip: !propertyId,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			if (data?.getProperty) setProperty(data?.getProperty);
-			if (data?.getProperty) setSlideImage(data?.getPropety?.propertyImages[0]);
+			if (data?.getProperty) setSlideImage(data?.getProperty?.propertyImages[0]);
 		},
 	});
 
@@ -121,6 +121,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 
 	/** LIFECYCLES **/
 	useEffect(() => {
+		if (!router.isReady) return;
 		if (router.query.id) {
 			setPropertyId(router.query.id as string);
 			setCommentInquiry({
@@ -134,7 +135,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 				commentRefId: router.query.id as string,
 			});
 		}
-	}, [router]);
+	}, [router.isReady, router.query.id]);
 
 	useEffect(() => {
 		if (commentInquiry.search.commentRefId) {
@@ -190,6 +191,14 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 			await sweetErrorHandling(err);
 		}
 	};
+
+	if (!router.isReady || !propertyId || getPropertyLoading) {
+		return (
+			<Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '1080px' }}>
+				<CircularProgress size={'4rem'} />
+			</Stack>
+		);
+	}
 
 	if (device === 'mobile') {
 		return <div>PROPERTY DETAIL PAGE</div>;
