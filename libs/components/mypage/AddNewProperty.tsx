@@ -220,6 +220,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								<Stack className="price-year-after-price">
 									<Typography className="title">Select Type</Typography>
 									<select
+										aria-label="Select Type"
 										className={'select-description'}
 										defaultValue={insertPropertyData.propertyType || 'select'}
 										value={insertPropertyData.propertyType || 'select'}
@@ -248,6 +249,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								<Stack className="price-year-after-price">
 									<Typography className="title">Select Location</Typography>
 									<select
+										aria-label="Select Location"
 										className={'select-description'}
 										defaultValue={insertPropertyData.propertyLocation || 'select'}
 										value={insertPropertyData.propertyLocation || 'select'}
@@ -288,6 +290,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								<Stack className="price-year-after-price">
 									<Typography className="title">Barter</Typography>
 									<select
+										aria-label="Barter"
 										className={'select-description'}
 										value={insertPropertyData.propertyBarter ? 'yes' : 'no'}
 										defaultValue={insertPropertyData.propertyBarter ? 'yes' : 'no'}
@@ -307,6 +310,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								<Stack className="price-year-after-price">
 									<Typography className="title">Rent</Typography>
 									<select
+										aria-label="Rent"
 										className={'select-description'}
 										value={insertPropertyData.propertyRent ? 'yes' : 'no'}
 										defaultValue={insertPropertyData.propertyRent ? 'yes' : 'no'}
@@ -329,6 +333,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								<Stack className="price-year-after-price">
 									<Typography className="title">Rooms</Typography>
 									<select
+										aria-label="Rooms"
 										className={'select-description'}
 										value={insertPropertyData.propertyRooms || 'select'}
 										defaultValue={insertPropertyData.propertyRooms || 'select'}
@@ -349,6 +354,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								<Stack className="price-year-after-price">
 									<Typography className="title">Bed</Typography>
 									<select
+										aria-label="Bed"
 										className={'select-description'}
 										value={insertPropertyData.propertyBeds || 'select'}
 										defaultValue={insertPropertyData.propertyBeds || 'select'}
@@ -369,6 +375,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								<Stack className="price-year-after-price">
 									<Typography className="title">Square</Typography>
 									<select
+										aria-label="Square"
 										className={'select-description'}
 										value={insertPropertyData.propertySquare || 'select'}
 										defaultValue={insertPropertyData.propertySquare || 'select'}
@@ -394,8 +401,9 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 							<Stack className="config-column">
 								<Typography className="title">Description</Typography>
 								<textarea
-									name=""
-									id=""
+									aria-label="Description"
+									name="propertyDesc"
+									id="property-desc"
 									className="description-text"
 									value={insertPropertyData.propertyDesc}
 									onChange={({ target: { value } }) =>
