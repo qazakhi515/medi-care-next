@@ -72,7 +72,6 @@ query GetMember($input: String!) {
         meFollowed {
 					followingId
 					followerId
-					myFollowing
 				}
     }
 }
@@ -527,7 +526,6 @@ export const GET_MEMBER_FOLLOWERS = gql`
 				meFollowed {
 					followingId
 					followerId
-					myFollowing
 				}
 				followerData {
 					_id
@@ -607,7 +605,6 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 				meFollowed {
 					followingId
 					followerId
-					myFollowing
 				}
 			}
 			metaCounter {

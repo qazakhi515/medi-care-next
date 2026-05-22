@@ -5,6 +5,10 @@ import useDeviceDetect from '../../hooks/useDeviceDetect';
 import Link from 'next/link';
 import { Member } from '../../types/member/member';
 import { REACT_APP_API_URL } from '../../config';
+import { useQuery, useReactiveVar } from '@apollo/client';
+import { GET_MEMBER } from '../../../apollo/user/query';
+import { T } from '../../types/common';
+import { userVar } from '../../../apollo/store';
 
 interface MemberMenuProps {
 	subscribeHandler: any;
@@ -18,8 +22,24 @@ const MemberMenu = (props: MemberMenuProps) => {
 	const category: any = router.query?.category;
 	const [member, setMember] = useState<Member | null>(null);
 	const { memberId } = router.query;
+	const user = useReactiveVar(userVar);
 
 	/** APOLLO REQUESTS **/
+
+	const {
+		loading: getMemberLoading,
+		data: getMemberData,
+		error: getMemberError,
+		refetch: getMemberRefetch,
+	} = useQuery(GET_MEMBER, {
+		fetchPolicy: 'network-only',
+		variables: { input: memberId },
+		skip: !memberId,
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setMember(data?.getMember);
+		},
+	});
 
 	if (device === 'mobile') {
 		return <div>MEMBER MENU MOBILE</div>;
@@ -43,12 +63,14 @@ const MemberMenu = (props: MemberMenuProps) => {
 					</Stack>
 				</Stack>
 				<Stack className="follow-button-box">
-					{member?.meFollowed && member?.meFollowed[0]?.myFollowing ? (
+					{member?.meFollowed?.some(
+						(follow) => follow?.followingId === member?._id && follow?.followerId === user?._id,
+					) ? (
 						<>
 							<Button
 								variant="outlined"
 								sx={{ background: '#b9b9b9' }}
-								onClick={() => unsubscribeHandler(member?._id, null, memberId)}
+								onClick={() => unsubscribeHandler(member?._id, getMemberRefetch, memberId)}
 							>
 								Unfollow
 							</Button>
@@ -58,7 +80,7 @@ const MemberMenu = (props: MemberMenuProps) => {
 						<Button
 							variant="contained"
 							sx={{ background: '#ff5d18', ':hover': { background: '#ff5d18' } }}
-							onClick={() => subscribeHandler(member?._id, null, memberId)}
+							onClick={() => subscribeHandler(member?._id, getMemberRefetch, memberId)}
 						>
 							Follow
 						</Button>

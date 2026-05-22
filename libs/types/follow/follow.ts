@@ -4,7 +4,7 @@ import { Member } from '../member/member';
 export interface MeFollowed {
 	followingId: string;
 	followerId: string;
-	myFollowing: boolean;
+	myFollowing?: boolean;
 }
 
 export interface Follower {
