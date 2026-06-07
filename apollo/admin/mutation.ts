@@ -17,7 +17,7 @@ export const UPDATE_MEMBER_BY_ADMIN = gql`
 			memberImage
 			memberAddress
 			memberDesc
-			memberProperties
+			memberHospitals
 			memberRank
 			memberArticles
 			memberPoints
@@ -34,30 +34,29 @@ export const UPDATE_MEMBER_BY_ADMIN = gql`
 `;
 
 /**************************
- *        PROPERTY        *
+ *        HOSPITAL        *
  *************************/
 
-export const UPDATE_PROPERTY_BY_ADMIN = gql`
-	mutation UpdatePropertyByAdmin($input: PropertyUpdate!) {
-		updatePropertyByAdmin(input: $input) {
+export const UPDATE_HOSPITAL_BY_ADMIN = gql`
+	mutation UpdateHospitalByAdmin($input: HospitalUpdate!) {
+		updateHospitalByAdmin(input: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			hospitalType
+			hospitalStatus
+			hospitalLocation
+			hospitalAddress
+			hospitalTitle
+			hospitalPrice
+			hospitalSquare
+			hospitalBeds
+			hospitalRooms
+			hospitalViews
+			hospitalLikes
+			hospitalImages
+			hospitalDesc
+			hospitalBarter
+			hospitalRent
 			memberId
-			soldAt
 			deletedAt
 			constructedAt
 			createdAt
@@ -66,27 +65,26 @@ export const UPDATE_PROPERTY_BY_ADMIN = gql`
 	}
 `;
 
-export const REMOVE_PROPERTY_BY_ADMIN = gql`
-	mutation RemovePropertyByAdmin($input: String!) {
-		removePropertyByAdmin(propertyId: $input) {
+export const REMOVE_HOSPITAL_BY_ADMIN = gql`
+	mutation RemoveHospitalByAdmin($input: String!) {
+		removeHospitalByAdmin(hospitalId: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			hospitalType
+			hospitalStatus
+			hospitalLocation
+			hospitalAddress
+			hospitalTitle
+			hospitalPrice
+			hospitalSquare
+			hospitalBeds
+			hospitalRooms
+			hospitalViews
+			hospitalLikes
+			hospitalImages
+			hospitalDesc
+			hospitalBarter
+			hospitalRent
 			memberId
-			soldAt
 			deletedAt
 			constructedAt
 			createdAt

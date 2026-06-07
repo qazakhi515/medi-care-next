@@ -20,7 +20,7 @@ export const GET_ALL_MEMBERS_BY_ADMIN = gql`
 				memberDesc
 				memberWarnings
 				memberBlocks
-				memberProperties
+				memberHospitals
 				memberRank
 				memberArticles
 				memberPoints
@@ -39,31 +39,30 @@ export const GET_ALL_MEMBERS_BY_ADMIN = gql`
 `;
 
 /**************************
- *        PROPERTY        *
+ *        HOSPITAL        *
  *************************/
 
-export const GET_ALL_PROPERTIES_BY_ADMIN = gql`
-	query GetAllPropertiesByAdmin($input: AllPropertiesInquiry!) {
-		getAllPropertiesByAdmin(input: $input) {
+export const GET_ALL_HOSPITALS_BY_ADMIN = gql`
+	query GetAllHospitalsByAdmin($input: AllHospitalsInquiry!) {
+		getAllHospitalsByAdmin(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				hospitalType
+				hospitalStatus
+				hospitalLocation
+				hospitalAddress
+				hospitalTitle
+				hospitalPrice
+				hospitalSquare
+				hospitalBeds
+				hospitalRooms
+				hospitalViews
+				hospitalLikes
+				hospitalImages
+				hospitalDesc
+				hospitalBarter
+				hospitalRent
 				memberId
-				soldAt
 				deletedAt
 				constructedAt
 				createdAt
@@ -81,7 +80,7 @@ export const GET_ALL_PROPERTIES_BY_ADMIN = gql`
 					memberDesc
 					memberWarnings
 					memberBlocks
-					memberProperties
+					memberHospitals
 					memberRank
 					memberPoints
 					memberLikes
@@ -131,7 +130,7 @@ export const GET_ALL_BOARD_ARTICLES_BY_ADMIN = gql`
 					memberDesc
 					memberWarnings
 					memberBlocks
-					memberProperties
+					memberHospitals
 					memberRank
 					memberPoints
 					memberLikes
@@ -178,7 +177,7 @@ export const GET_COMMENTS = gql`
 					memberDesc
 					memberWarnings
 					memberBlocks
-					memberProperties
+					memberHospitals
 					memberRank
 					memberPoints
 					memberLikes

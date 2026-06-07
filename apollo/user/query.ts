@@ -20,7 +20,7 @@ export const GET_AGENTS = gql`
 				memberDesc
 				memberWarnings
 				memberBlocks
-				memberProperties
+				memberHospitals
 				memberRank
 				memberPoints
 				memberLikes
@@ -55,7 +55,7 @@ query GetMember($input: String!) {
         memberImage
         memberAddress
         memberDesc
-        memberProperties
+        memberHospitals
         memberArticles
         memberPoints
         memberLikes
@@ -78,30 +78,29 @@ query GetMember($input: String!) {
 `);
 
 /**************************
- *        PROPERTY        *
+ *        HOSPITAL        *
  *************************/
 
-export const GET_PROPERTY = gql`
-	query GetProperty($input: String!) {
-		getProperty(propertyId: $input) {
+export const GET_HOSPITAL = gql`
+	query GetHospital($input: String!) {
+		getHospital(hospitalId: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			hospitalType
+			hospitalStatus
+			hospitalLocation
+			hospitalAddress
+			hospitalTitle
+			hospitalPrice
+			hospitalSquare
+			hospitalBeds
+			hospitalRooms
+			hospitalViews
+			hospitalLikes
+			hospitalImages
+			hospitalDesc
+			hospitalBarter
+			hospitalRent
 			memberId
-			soldAt
 			deletedAt
 			constructedAt
 			createdAt
@@ -136,29 +135,28 @@ export const GET_PROPERTY = gql`
 	}
 `;
 
-export const GET_PROPERTIES = gql`
-	query GetProperties($input: PropertiesInquiry!) {
-		getProperties(input: $input) {
+export const GET_HOSPITALS = gql`
+	query GetHospitals($input: HospitalsInquiry!) {
+		getHospitals(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyRank
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				hospitalType
+				hospitalStatus
+				hospitalLocation
+				hospitalAddress
+				hospitalTitle
+				hospitalPrice
+				hospitalSquare
+				hospitalBeds
+				hospitalRooms
+				hospitalViews
+				hospitalLikes
+				hospitalRank
+				hospitalImages
+				hospitalDesc
+				hospitalBarter
+				hospitalRent
 				memberId
-				soldAt
 				deletedAt
 				constructedAt
 				createdAt
@@ -176,7 +174,7 @@ export const GET_PROPERTIES = gql`
 					memberDesc
 					memberWarnings
 					memberBlocks
-					memberProperties
+					memberHospitals
 					memberRank
 					memberPoints
 					memberLikes
@@ -198,28 +196,27 @@ export const GET_PROPERTIES = gql`
 	}
 `;
 
-export const GET_AGENT_PROPERTIES = gql`
-	query GetAgentProperties($input: AgentPropertiesInquiry!) {
-		getAgentProperties(input: $input) {
+export const GET_AGENT_HOSPITALS = gql`
+	query GetAgentHospitals($input: AgentHospitalsInquiry!) {
+		getAgentHospitals(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				hospitalType
+				hospitalStatus
+				hospitalLocation
+				hospitalAddress
+				hospitalTitle
+				hospitalPrice
+				hospitalSquare
+				hospitalBeds
+				hospitalRooms
+				hospitalViews
+				hospitalLikes
+				hospitalImages
+				hospitalDesc
+				hospitalBarter
+				hospitalRent
 				memberId
-				soldAt
 				deletedAt
 				constructedAt
 				createdAt
@@ -237,25 +234,24 @@ export const GET_FAVORITES = gql`
 		getFavorites(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyComments
-				propertyRank
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				hospitalType
+				hospitalStatus
+				hospitalLocation
+				hospitalAddress
+				hospitalTitle
+				hospitalPrice
+				hospitalSquare
+				hospitalBeds
+				hospitalRooms
+				hospitalViews
+				hospitalLikes
+				hospitalComments
+				hospitalRank
+				hospitalImages
+				hospitalDesc
+				hospitalBarter
+				hospitalRent
 				memberId
-				soldAt
 				deletedAt
 				constructedAt
 				createdAt
@@ -271,7 +267,7 @@ export const GET_FAVORITES = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberProperties
+					memberHospitals
 					memberArticles
 					memberPoints
 					memberLikes
@@ -300,25 +296,24 @@ export const GET_VISITED = gql`
 		getVisited(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyComments
-				propertyRank
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				hospitalType
+				hospitalStatus
+				hospitalLocation
+				hospitalAddress
+				hospitalTitle
+				hospitalPrice
+				hospitalSquare
+				hospitalBeds
+				hospitalRooms
+				hospitalViews
+				hospitalLikes
+				hospitalComments
+				hospitalRank
+				hospitalImages
+				hospitalDesc
+				hospitalBarter
+				hospitalRent
 				memberId
-				soldAt
 				deletedAt
 				constructedAt
 				createdAt
@@ -334,7 +329,7 @@ export const GET_VISITED = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberProperties
+					memberHospitals
 					memberArticles
 					memberPoints
 					memberLikes
@@ -390,7 +385,7 @@ export const GET_BOARD_ARTICLE = gql`
 				memberDesc
 				memberWarnings
 				memberBlocks
-				memberProperties
+				memberHospitals
 				memberRank
 				memberPoints
 				memberLikes
@@ -442,7 +437,7 @@ export const GET_BOARD_ARTICLES = gql`
 					memberDesc
 					memberWarnings
 					memberBlocks
-					memberProperties
+					memberHospitals
 					memberRank
 					memberPoints
 					memberLikes
@@ -488,7 +483,7 @@ export const GET_COMMENTS = gql`
 					memberDesc
 					memberWarnings
 					memberBlocks
-					memberProperties
+					memberHospitals
 					memberRank
 					memberPoints
 					memberLikes
@@ -538,7 +533,7 @@ export const GET_MEMBER_FOLLOWERS = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberProperties
+					memberHospitals
 					memberArticles
 					memberPoints
 					memberLikes
@@ -581,7 +576,7 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberProperties
+					memberHospitals
 					memberArticles
 					memberPoints
 					memberLikes
@@ -610,6 +605,235 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 			metaCounter {
 				total
 			}
+		}
+	}
+`;
+
+/**************************
+ *         DOCTOR         *
+ *************************/
+
+export const GET_DOCTOR = gql`
+	query GetDoctor($input: String!) {
+		getDoctor(doctorId: $input) {
+			_id
+			memberId
+			doctorStatus
+			specialization
+			licenseNumber
+			experienceYears
+			consultationFee
+			education
+			certificates
+			doctorRank
+			doctorViews
+			createdAt
+			updatedAt
+			memberData {
+				_id
+				memberType
+				memberNick
+				memberFullName
+				memberImage
+				memberPhone
+				memberAddress
+				memberDesc
+			}
+		}
+	}
+`;
+
+export const GET_DOCTORS = gql`
+	query GetDoctors($input: DoctorsInquiry!) {
+		getDoctors(input: $input) {
+			list {
+				_id
+				memberId
+				doctorStatus
+				specialization
+				licenseNumber
+				experienceYears
+				consultationFee
+				education
+				certificates
+				doctorRank
+				doctorViews
+				createdAt
+				updatedAt
+				memberData {
+					_id
+					memberType
+					memberNick
+					memberFullName
+					memberImage
+					memberPhone
+					memberAddress
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+/**************************
+ *     DOCTOR-SCHEDULE    *
+ *************************/
+
+export const GET_DOCTOR_SCHEDULES = gql`
+	query GetDoctorSchedules($input: DoctorSchedulesInquiry!) {
+		getDoctorSchedules(input: $input) {
+			list {
+				_id
+				doctorId
+				scheduleStatus
+				dayOfWeek
+				startTime
+				endTime
+				slotDuration
+				createdAt
+				updatedAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+/**************************
+ *       APPOINTMENT      *
+ *************************/
+
+export const GET_APPOINTMENT = gql`
+	query GetAppointment($input: String!) {
+		getAppointment(appointmentId: $input) {
+			_id
+			patientId
+			doctorId
+			appointmentDate
+			startTime
+			endTime
+			symptoms
+			appointmentStatus
+			appointmentReason
+			cancellationReason
+			createdAt
+			updatedAt
+			doctorData {
+				_id
+				specialization
+				consultationFee
+				memberData {
+					_id
+					memberNick
+					memberFullName
+					memberImage
+				}
+			}
+			patientData {
+				_id
+				memberNick
+				memberFullName
+				memberImage
+			}
+		}
+	}
+`;
+
+export const GET_APPOINTMENTS = gql`
+	query GetAppointments($input: AppointmentsInquiry!) {
+		getAppointments(input: $input) {
+			list {
+				_id
+				patientId
+				doctorId
+				appointmentDate
+				startTime
+				endTime
+				symptoms
+				appointmentStatus
+				appointmentReason
+				cancellationReason
+				createdAt
+				updatedAt
+				doctorData {
+					_id
+					specialization
+					consultationFee
+					memberData {
+						_id
+						memberNick
+						memberFullName
+						memberImage
+					}
+				}
+				patientData {
+					_id
+					memberNick
+					memberFullName
+					memberImage
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+/**************************
+ *        PAYMENT         *
+ *************************/
+
+export const GET_PAYMENTS = gql`
+	query GetPayments($input: PaymentsInquiry!) {
+		getPayments(input: $input) {
+			list {
+				_id
+				appointmentId
+				patientId
+				doctorId
+				paymentStatus
+				amount
+				paymentMethod
+				paidAt
+				createdAt
+				updatedAt
+				doctorData {
+					_id
+					specialization
+					memberData {
+						_id
+						memberNick
+						memberFullName
+					}
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+/**************************
+ *    PATIENT-PROFILE     *
+ *************************/
+
+export const GET_PATIENT_PROFILE = gql`
+	query GetPatientProfile {
+		getPatientProfile {
+			_id
+			memberId
+			birthDate
+			gender
+			bloodType
+			chronicDiseases
+			emergencyContact
+			createdAt
+			updatedAt
 		}
 	}
 `;

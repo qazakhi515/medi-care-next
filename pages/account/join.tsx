@@ -17,7 +17,7 @@ export const getStaticProps = async ({ locale }: any) => ({
 const Join: NextPage = () => {
 	const router = useRouter();
 	const device = useDeviceDetect();
-	const [input, setInput] = useState({ nick: '', password: '', phone: '', type: 'USER' });
+	const [input, setInput] = useState({ nick: '', password: '', phone: '', type: 'PATIENT' });
 	const [loginView, setLoginView] = useState<boolean>(true);
 
 	/** HANDLERS **/
@@ -31,7 +31,7 @@ const Join: NextPage = () => {
 			const value = e.target.name;
 			handleInput('type', value);
 		} else {
-			handleInput('type', 'USER');
+			handleInput('type', 'PATIENT');
 		}
 	};
 
@@ -85,7 +85,9 @@ const Join: NextPage = () => {
 									<span>Nickname</span>
 									<input
 										type="text"
-										placeholder={'Enter Nickname'}
+										placeholder={'Enter Nickname (3-12 chars)'}
+										minLength={3}
+										maxLength={12}
 										onChange={(e) => handleInput('nick', e.target.value)}
 										required={true}
 										onKeyDown={(event) => {
@@ -97,8 +99,10 @@ const Join: NextPage = () => {
 								<div className={'input-box'}>
 									<span>Password</span>
 									<input
-										type="text"
-										placeholder={'Enter Password'}
+										type="password"
+										placeholder={'Enter Password (5-12 chars)'}
+										minLength={5}
+										maxLength={12}
 										onChange={(e) => handleInput('password', e.target.value)}
 										required={true}
 										onKeyDown={(event) => {
@@ -132,12 +136,12 @@ const Join: NextPage = () => {
 													control={
 														<Checkbox
 															size="small"
-															name={'USER'}
+															name={'PATIENT'}
 															onChange={checkUserTypeHandler}
-															checked={input?.type == 'USER'}
+															checked={input?.type == 'PATIENT'}
 														/>
 													}
-													label="User"
+													label="Patient"
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -145,12 +149,12 @@ const Join: NextPage = () => {
 													control={
 														<Checkbox
 															size="small"
-															name={'AGENT'}
+															name={'DOCTOR'}
 															onChange={checkUserTypeHandler}
-															checked={input?.type == 'AGENT'}
+															checked={input?.type == 'DOCTOR'}
 														/>
 													}
-													label="Agent"
+													label="Doctor"
 												/>
 											</FormGroup>
 										</div>

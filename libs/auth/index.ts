@@ -2,7 +2,6 @@ import decodeJWT from 'jwt-decode';
 import { initializeApollo } from '../../apollo/client';
 import { userVar } from '../../apollo/store';
 import { CustomJwtPayload } from '../types/customJwtPayload';
-import { sweetMixinErrorAlert } from '../sweetAlert';
 import { LOGIN, SIGN_UP } from '../../apollo/user/mutation';
 
 export function getJwtToken(): any {
@@ -25,8 +24,10 @@ export const logIn = async (nick: string, password: string): Promise<void> => {
 		}
 	} catch (err) {
 		console.warn('login err', err);
-		logOut();
-		//throw new Error('Login Err');
+		// reload qilmaymiz va xatoni yuqoriga uzatamiz: aks holda muvaffaqiyatsiz loginda ham home'ga redirect bo'lib ketadi
+		deleteStorage();
+		deleteUserInfo();
+		throw err;
 	}
 };
 
@@ -51,16 +52,9 @@ const requestJwtToken = async ({
 
 		return { jwtToken: accessToken };
 	} catch (err: any) {
-		console.log('request token err', err.graphQLErrors);
-		switch (err.graphQLErrors[0].message) {
-			case 'Definer: login and password do not match':
-				await sweetMixinErrorAlert('Please check your password again');
-				break;
-			case 'Definer: user has been blocked!':
-				await sweetMixinErrorAlert('User has been blocked!');
-				break;
-		}
-		throw new Error('token error');
+		const message = err?.graphQLErrors?.[0]?.message ?? err?.message ?? 'Something went wrong, please try again';
+		console.log('request token err', message, err?.graphQLErrors);
+		throw new Error(message);
 	}
 };
 
@@ -73,9 +67,10 @@ export const signUp = async (nick: string, password: string, phone: string, type
 			updateUserInfo(jwtToken);
 		}
 	} catch (err) {
-		console.warn('login err', err);
-		logOut();
-		//throw new Error('Login Err');
+		console.warn('signup err', err);
+		deleteStorage();
+		deleteUserInfo();
+		throw err;
 	}
 };
 
@@ -101,21 +96,14 @@ const requestSignUpJwtToken = async ({
 			fetchPolicy: 'network-only',
 		});
 
-		console.log('---------- login ----------');
+		console.log('---------- signup ----------');
 		const { accessToken } = result?.data?.signup;
 
 		return { jwtToken: accessToken };
 	} catch (err: any) {
-		console.log('request token err', err.graphQLErrors);
-		switch (err.graphQLErrors[0].message) {
-			case 'Definer: login and password do not match':
-				await sweetMixinErrorAlert('Please check your password again');
-				break;
-			case 'Definer: user has been blocked!':
-				await sweetMixinErrorAlert('User has been blocked!');
-				break;
-		}
-		throw new Error('token error');
+		const message = err?.graphQLErrors?.[0]?.message ?? err?.message ?? 'Something went wrong, please try again';
+		console.log('request signup token err', message, err?.graphQLErrors);
+		throw new Error(message);
 	}
 };
 
@@ -142,7 +130,7 @@ export const updateUserInfo = (jwtToken: any) => {
 				: `${claims.memberImage}`,
 		memberAddress: claims.memberAddress ?? '',
 		memberDesc: claims.memberDesc ?? '',
-		memberProperties: claims.memberProperties,
+		memberHospitals: claims.memberHospitals,
 		memberRank: claims.memberRank,
 		memberArticles: claims.memberArticles,
 		memberPoints: claims.memberPoints,
@@ -176,7 +164,7 @@ const deleteUserInfo = () => {
 		memberImage: '',
 		memberAddress: '',
 		memberDesc: '',
-		memberProperties: 0,
+		memberHospitals: 0,
 		memberRank: 0,
 		memberArticles: 0,
 		memberPoints: 0,

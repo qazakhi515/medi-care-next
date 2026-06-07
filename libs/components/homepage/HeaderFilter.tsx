@@ -6,9 +6,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { propertySquare, propertyYears } from '../../config';
-import { PropertyLocation, PropertyType } from '../../enums/property.enum';
-import { PropertiesInquiry } from '../../types/property/property.input';
+import { hospitalSquare, hospitalYears } from '../../config';
+import { HospitalLocation, HospitalType } from '../../enums/hospital.enum';
+import { HospitalsInquiry } from '../../types/hospital/hospital.input';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
@@ -35,24 +35,22 @@ const MenuProps = {
 const thisYear = new Date().getFullYear();
 
 interface HeaderFilterProps {
-	initialInput: PropertiesInquiry;
+	initialInput: HospitalsInquiry;
 }
 
 const HeaderFilter = (props: HeaderFilterProps) => {
 	const { initialInput } = props;
 	const device = useDeviceDetect();
 	const { t, i18n } = useTranslation('common');
-	const [searchFilter, setSearchFilter] = useState<PropertiesInquiry>(initialInput);
+	const [searchFilter, setSearchFilter] = useState<HospitalsInquiry>(initialInput);
 	const locationRef: any = useRef();
 	const typeRef: any = useRef();
-	const roomsRef: any = useRef();
 	const router = useRouter();
 	const [openAdvancedFilter, setOpenAdvancedFilter] = useState(false);
 	const [openLocation, setOpenLocation] = useState(false);
 	const [openType, setOpenType] = useState(false);
-	const [openRooms, setOpenRooms] = useState(false);
-	const [propertyLocation, setPropertyLocation] = useState<PropertyLocation[]>(Object.values(PropertyLocation));
-	const [propertyType, setPropertyType] = useState<PropertyType[]>(Object.values(PropertyType));
+	const [hospitalLocation, setHospitalLocation] = useState<HospitalLocation[]>(Object.values(HospitalLocation));
+	const [hospitalType, setHospitalType] = useState<HospitalType[]>(Object.values(HospitalType));
 	const [yearCheck, setYearCheck] = useState({ start: 1970, end: thisYear });
 	const [optionCheck, setOptionCheck] = useState('all');
 
@@ -66,10 +64,6 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 			if (!typeRef?.current?.contains(event.target)) {
 				setOpenType(false);
 			}
-
-			if (!roomsRef?.current?.contains(event.target)) {
-				setOpenRooms(false);
-			}
 		};
 
 		document.addEventListener('mousedown', clickHandler);
@@ -82,36 +76,26 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 	/** HANDLERS **/
 	const advancedFilterHandler = (status: boolean) => {
 		setOpenLocation(false);
-		setOpenRooms(false);
 		setOpenType(false);
 		setOpenAdvancedFilter(status);
 	};
 
 	const locationStateChangeHandler = () => {
 		setOpenLocation((prev) => !prev);
-		setOpenRooms(false);
 		setOpenType(false);
 	};
 
 	const typeStateChangeHandler = () => {
 		setOpenType((prev) => !prev);
 		setOpenLocation(false);
-		setOpenRooms(false);
-	};
-
-	const roomStateChangeHandler = () => {
-		setOpenRooms((prev) => !prev);
-		setOpenType(false);
-		setOpenLocation(false);
 	};
 
 	const disableAllStateHandler = () => {
-		setOpenRooms(false);
 		setOpenType(false);
 		setOpenLocation(false);
 	};
 
-	const propertyLocationSelectHandler = useCallback(
+	const hospitalLocationSelectHandler = useCallback(
 		async (value: any) => {
 			try {
 				setSearchFilter({
@@ -123,13 +107,13 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 				});
 				typeStateChangeHandler();
 			} catch (err: any) {
-				console.log('ERROR, propertyLocationSelectHandler:', err);
+				console.log('ERROR, hospitalLocationSelectHandler:', err);
 			}
 		},
 		[searchFilter],
 	);
 
-	const propertyTypeSelectHandler = useCallback(
+	const hospitalTypeSelectHandler = useCallback(
 		async (value: any) => {
 			try {
 				setSearchFilter({
@@ -139,33 +123,15 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 						typeList: [value],
 					},
 				});
-				roomStateChangeHandler();
-			} catch (err: any) {
-				console.log('ERROR, propertyTypeSelectHandler:', err);
-			}
-		},
-		[searchFilter],
-	);
-
-	const propertyRoomSelectHandler = useCallback(
-		async (value: any) => {
-			try {
-				setSearchFilter({
-					...searchFilter,
-					search: {
-						...searchFilter.search,
-						roomsList: [value],
-					},
-				});
 				disableAllStateHandler();
 			} catch (err: any) {
-				console.log('ERROR, propertyRoomSelectHandler:', err);
+				console.log('ERROR, hospitalTypeSelectHandler:', err);
 			}
 		},
 		[searchFilter],
 	);
 
-	const propertyBedSelectHandler = useCallback(
+	const hospitalBedSelectHandler = useCallback(
 		async (number: Number) => {
 			try {
 				if (number != 0) {
@@ -188,15 +154,15 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					setSearchFilter({ ...searchFilter });
 				}
 
-				console.log('propertyBedSelectHandler:', number);
+				console.log('hospitalBedSelectHandler:', number);
 			} catch (err: any) {
-				console.log('ERROR, propertyBedSelectHandler:', err);
+				console.log('ERROR, hospitalBedSelectHandler:', err);
 			}
 		},
 		[searchFilter],
 	);
 
-	const propertyOptionSelectHandler = useCallback(
+	const hospitalOptionSelectHandler = useCallback(
 		async (e: any) => {
 			try {
 				const value = e.target.value;
@@ -220,13 +186,13 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					});
 				}
 			} catch (err: any) {
-				console.log('ERROR, propertyOptionSelectHandler:', err);
+				console.log('ERROR, hospitalOptionSelectHandler:', err);
 			}
 		},
 		[searchFilter],
 	);
 
-	const propertySquareHandler = useCallback(
+	const hospitalSquareHandler = useCallback(
 		async (e: any, type: string) => {
 			const value = e.target.value;
 
@@ -293,10 +259,6 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 				delete searchFilter.search.typeList;
 			}
 
-			if (searchFilter?.search?.roomsList?.length == 0) {
-				delete searchFilter.search.roomsList;
-			}
-
 			if (searchFilter?.search?.options?.length == 0) {
 				delete searchFilter.search.options;
 			}
@@ -306,8 +268,8 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 			}
 
 			await router.push(
-				`/property?input=${JSON.stringify(searchFilter)}`,
-				`/property?input=${JSON.stringify(searchFilter)}`,
+				`/hospital?input=${JSON.stringify(searchFilter)}`,
+				`/hospital?input=${JSON.stringify(searchFilter)}`,
 			);
 		} catch (err: any) {
 			console.log('ERROR, pushSearchHandler:', err);
@@ -326,13 +288,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 							<ExpandMoreIcon />
 						</Box>
 						<Box className={`box ${openType ? 'on' : ''}`} onClick={typeStateChangeHandler}>
-							<span> {searchFilter?.search?.typeList ? searchFilter?.search?.typeList[0] : t('Property type')} </span>
-							<ExpandMoreIcon />
-						</Box>
-						<Box className={`box ${openRooms ? 'on' : ''}`} onClick={roomStateChangeHandler}>
-							<span>
-								{searchFilter?.search?.roomsList ? `${searchFilter?.search?.roomsList[0]} rooms}` : t('Rooms')}
-							</span>
+							<span> {searchFilter?.search?.typeList ? searchFilter?.search?.typeList[0] : t('Hospital type')} </span>
 							<ExpandMoreIcon />
 						</Box>
 					</Stack>
@@ -348,9 +304,9 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 
 					{/*MENU */}
 					<div className={`filter-location ${openLocation ? 'on' : ''}`} ref={locationRef}>
-						{propertyLocation.map((location: string) => {
+						{hospitalLocation.map((location: string) => {
 							return (
-								<div onClick={() => propertyLocationSelectHandler(location)} key={location}>
+								<div onClick={() => hospitalLocationSelectHandler(location)} key={location}>
 									<img src={`img/banner/cities/${location}.webp`} alt="" />
 									<span>{location}</span>
 								</div>
@@ -359,25 +315,15 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					</div>
 
 					<div className={`filter-type ${openType ? 'on' : ''}`} ref={typeRef}>
-						{propertyType.map((type: string) => {
+						{hospitalType.map((type: string) => {
 							return (
 								<div
 									style={{ backgroundImage: `url(/img/banner/types/${type.toLowerCase()}.webp)` }}
-									onClick={() => propertyTypeSelectHandler(type)}
+									onClick={() => hospitalTypeSelectHandler(type)}
 									key={type}
 								>
 									<span>{type}</span>
 								</div>
-							);
-						})}
-					</div>
-
-					<div className={`filter-rooms ${openRooms ? 'on' : ''}`} ref={roomsRef}>
-						{[1, 2, 3, 4, 5].map((room: number) => {
-							return (
-								<span onClick={() => propertyRoomSelectHandler(room)} key={room}>
-									{room} room{room > 1 ? 's' : ''}
-								</span>
 							);
 						})}
 					</div>
@@ -421,14 +367,14 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 										<div className={'inside'}>
 											<div
 												className={`room ${!searchFilter?.search?.bedsList ? 'active' : ''}`}
-												onClick={() => propertyBedSelectHandler(0)}
+												onClick={() => hospitalBedSelectHandler(0)}
 											>
 												Any
 											</div>
 											{[1, 2, 3, 4, 5].map((bed: number) => (
 												<div
 													className={`room ${searchFilter?.search?.bedsList?.includes(bed) ? 'active' : ''}`}
-													onClick={() => propertyBedSelectHandler(bed)}
+													onClick={() => hospitalBedSelectHandler(bed)}
 													key={bed}
 												>
 													{bed == 0 ? 'Any' : bed}
@@ -442,13 +388,13 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 											<FormControl>
 												<Select
 													value={optionCheck}
-													onChange={propertyOptionSelectHandler}
+													onChange={hospitalOptionSelectHandler}
 													displayEmpty
 													inputProps={{ 'aria-label': 'Without label' }}
 												>
 													<MenuItem value={'all'}>All Options</MenuItem>
-													<MenuItem value={'propertyBarter'}>Barter</MenuItem>
-													<MenuItem value={'propertyRent'}>Rent</MenuItem>
+													<MenuItem value={'hospitalBarter'}>Barter</MenuItem>
+													<MenuItem value={'hospitalRent'}>Rent</MenuItem>
 												</Select>
 											</FormControl>
 										</div>
@@ -466,7 +412,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 													inputProps={{ 'aria-label': 'Without label' }}
 													MenuProps={MenuProps}
 												>
-													{propertyYears?.slice(0)?.map((year: number) => (
+													{hospitalYears?.slice(0)?.map((year: number) => (
 														<MenuItem value={year} disabled={yearCheck.end <= year} key={year}>
 															{year}
 														</MenuItem>
@@ -482,7 +428,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 													inputProps={{ 'aria-label': 'Without label' }}
 													MenuProps={MenuProps}
 												>
-													{propertyYears
+													{hospitalYears
 														?.slice(0)
 														.reverse()
 														.map((year: number) => (
@@ -500,12 +446,12 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 											<FormControl sx={{ width: '122px' }}>
 												<Select
 													value={searchFilter?.search?.squaresRange?.start}
-													onChange={(e: any) => propertySquareHandler(e, 'start')}
+													onChange={(e: any) => hospitalSquareHandler(e, 'start')}
 													displayEmpty
 													inputProps={{ 'aria-label': 'Without label' }}
 													MenuProps={MenuProps}
 												>
-													{propertySquare.map((square: number) => (
+													{hospitalSquare.map((square: number) => (
 														<MenuItem
 															value={square}
 															disabled={(searchFilter?.search?.squaresRange?.end || 0) < square}
@@ -520,12 +466,12 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 											<FormControl sx={{ width: '122px' }}>
 												<Select
 													value={searchFilter?.search?.squaresRange?.end}
-													onChange={(e: any) => propertySquareHandler(e, 'end')}
+													onChange={(e: any) => hospitalSquareHandler(e, 'end')}
 													displayEmpty
 													inputProps={{ 'aria-label': 'Without label' }}
 													MenuProps={MenuProps}
 												>
-													{propertySquare.map((square: number) => (
+													{hospitalSquare.map((square: number) => (
 														<MenuItem
 															value={square}
 															disabled={(searchFilter?.search?.squaresRange?.start || 0) > square}

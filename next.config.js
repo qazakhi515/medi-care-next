@@ -6,6 +6,12 @@ const nextConfig = {
 		REACT_APP_API_GRAPHQL_URL: process.env.REACT_APP_API_GRAPHQL_URL,
 		REACT_APP_API_WS: process.env.REACT_APP_API_WS,
 	},
+	async redirects() {
+		return [
+			{ source: '/property', destination: '/hospital', permanent: false },
+			{ source: '/property/detail', destination: '/hospital/detail', permanent: false },
+		];
+	},
 };
 
 const { i18n } = require('./next-i18next.config');
