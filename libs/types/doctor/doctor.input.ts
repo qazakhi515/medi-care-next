@@ -8,11 +8,13 @@ export interface DoctorInput {
 	consultationFee?: number;
 	education?: string;
 	certificates?: string;
+	hospitalId?: string;
 }
 
 interface DISearch {
 	doctorStatus?: DoctorStatus;
 	specializationList?: Specialization[];
+	hospitalId?: string;
 	text?: string;
 }
 

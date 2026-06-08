@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Button, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { HospitalLocation, HospitalType } from '../../enums/hospital.enum';
-import { REACT_APP_API_URL, hospitalSquare } from '../../config';
+import { REACT_APP_API_URL } from '../../config';
 import { HospitalInput } from '../../types/hospital/hospital.input';
 import axios from 'axios';
 import { getJwtToken } from '../../auth';
@@ -34,6 +34,7 @@ const AddHospital = ({ initialValues, ...props }: any) => {
 		refetch: getHospitalRefetch,
 	} = useQuery(GET_HOSPITAL, {
 		fetchPolicy: 'network-only',
+		skip: !router.query.hospitalId,
 		variables: {
 			input: router.query.hospitalId,
 		},
@@ -114,15 +115,11 @@ const AddHospital = ({ initialValues, ...props }: any) => {
 	const doDisabledCheck = () => {
 		if (
 			insertHospitalData.hospitalTitle === '' ||
-			insertHospitalData.hospitalPrice === 0 || // @ts-ignore
+			!insertHospitalData.hospitalPrice ||
+			isNaN(insertHospitalData.hospitalPrice) || // @ts-ignore
 			insertHospitalData.hospitalType === '' || // @ts-ignore
 			insertHospitalData.hospitalLocation === '' || // @ts-ignore
-			insertHospitalData.hospitalAddress === '' || // @ts-ignore
-			insertHospitalData.hospitalBarter === '' || // @ts-ignore
-			insertHospitalData.hospitalRent === '' ||
-			insertHospitalData.hospitalRooms === 0 ||
-			insertHospitalData.hospitalBeds === 0 ||
-			insertHospitalData.hospitalSquare === 0 ||
+			insertHospitalData.hospitalAddress === '' ||
 			insertHospitalData.hospitalDesc === '' ||
 			insertHospitalData.hospitalImages.length === 0
 		) {
@@ -211,10 +208,11 @@ const AddHospital = ({ initialValues, ...props }: any) => {
 										type="text"
 										className="description-input"
 										placeholder={'Price'}
-										value={insertHospitalData.hospitalPrice}
-										onChange={({ target: { value } }) =>
-											setInsertHospitalData({ ...insertHospitalData, hospitalPrice: parseInt(value) })
-										}
+										value={insertHospitalData.hospitalPrice === 0 ? '' : insertHospitalData.hospitalPrice}
+										onChange={({ target: { value } }) => {
+											const num = parseInt(value);
+											setInsertHospitalData({ ...insertHospitalData, hospitalPrice: isNaN(num) ? 0 : num });
+										}}
 									/>
 								</Stack>
 								<Stack className="price-year-after-price">
@@ -283,117 +281,6 @@ const AddHospital = ({ initialValues, ...props }: any) => {
 											setInsertHospitalData({ ...insertHospitalData, hospitalAddress: value })
 										}
 									/>
-								</Stack>
-							</Stack>
-
-							<Stack className="config-row">
-								<Stack className="price-year-after-price">
-									<Typography className="title">Barter</Typography>
-									<select
-										aria-label="Barter"
-										className={'select-description'}
-										value={insertHospitalData.hospitalBarter ? 'yes' : 'no'}
-										defaultValue={insertHospitalData.hospitalBarter ? 'yes' : 'no'}
-										onChange={({ target: { value } }) =>
-											setInsertHospitalData({ ...insertHospitalData, hospitalBarter: value === 'yes' })
-										}
-									>
-										<option disabled={true} selected={true}>
-											Select
-										</option>
-										<option value={'yes'}>Yes</option>
-										<option value={'no'}>No</option>
-									</select>
-									<div className={'divider'}></div>
-									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
-								</Stack>
-								<Stack className="price-year-after-price">
-									<Typography className="title">Rent</Typography>
-									<select
-										aria-label="Rent"
-										className={'select-description'}
-										value={insertHospitalData.hospitalRent ? 'yes' : 'no'}
-										defaultValue={insertHospitalData.hospitalRent ? 'yes' : 'no'}
-										onChange={({ target: { value } }) =>
-											setInsertHospitalData({ ...insertHospitalData, hospitalRent: value === 'yes' })
-										}
-									>
-										<option disabled={true} selected={true}>
-											Select
-										</option>
-										<option value={'yes'}>Yes</option>
-										<option value={'no'}>No</option>
-									</select>
-									<div className={'divider'}></div>
-									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
-								</Stack>
-							</Stack>
-
-							<Stack className="config-row">
-								<Stack className="price-year-after-price">
-									<Typography className="title">Rooms</Typography>
-									<select
-										aria-label="Rooms"
-										className={'select-description'}
-										value={insertHospitalData.hospitalRooms || 'select'}
-										defaultValue={insertHospitalData.hospitalRooms || 'select'}
-										onChange={({ target: { value } }) =>
-											setInsertHospitalData({ ...insertHospitalData, hospitalRooms: parseInt(value) })
-										}
-									>
-										<option disabled={true} selected={true} value={'select'}>
-											Select
-										</option>
-										{[1, 2, 3, 4, 5].map((room: number) => (
-											<option value={`${room}`}>{room}</option>
-										))}
-									</select>
-									<div className={'divider'}></div>
-									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
-								</Stack>
-								<Stack className="price-year-after-price">
-									<Typography className="title">Bed</Typography>
-									<select
-										aria-label="Bed"
-										className={'select-description'}
-										value={insertHospitalData.hospitalBeds || 'select'}
-										defaultValue={insertHospitalData.hospitalBeds || 'select'}
-										onChange={({ target: { value } }) =>
-											setInsertHospitalData({ ...insertHospitalData, hospitalBeds: parseInt(value) })
-										}
-									>
-										<option disabled={true} selected={true} value={'select'}>
-											Select
-										</option>
-										{[1, 2, 3, 4, 5].map((bed: number) => (
-											<option value={`${bed}`}>{bed}</option>
-										))}
-									</select>
-									<div className={'divider'}></div>
-									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
-								</Stack>
-								<Stack className="price-year-after-price">
-									<Typography className="title">Square</Typography>
-									<select
-										aria-label="Square"
-										className={'select-description'}
-										value={insertHospitalData.hospitalSquare || 'select'}
-										defaultValue={insertHospitalData.hospitalSquare || 'select'}
-										onChange={({ target: { value } }) =>
-											setInsertHospitalData({ ...insertHospitalData, hospitalSquare: parseInt(value) })
-										}
-									>
-										<option disabled={true} selected={true} value={'select'}>
-											Select
-										</option>
-										{hospitalSquare.map((square: number) => {
-											if (square !== 0) {
-												return <option value={`${square}`}>{square}</option>;
-											}
-										})}
-									</select>
-									<div className={'divider'}></div>
-									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
 								</Stack>
 							</Stack>
 

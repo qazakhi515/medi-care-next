@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
@@ -6,9 +6,10 @@ import { Stack, Typography, Button, Divider, MenuItem, TextField, Chip, IconButt
 import DeleteIcon from '@mui/icons-material/Delete';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
-import { GET_DOCTORS, GET_DOCTOR_SCHEDULES } from '../../apollo/user/query';
+import { GET_DOCTORS, GET_DOCTOR_SCHEDULES, GET_HOSPITALS } from '../../apollo/user/query';
 import {
 	CREATE_DOCTOR,
+	UPDATE_DOCTOR,
 	CREATE_DOCTOR_SCHEDULE,
 	REMOVE_DOCTOR_SCHEDULE,
 } from '../../apollo/user/mutation';
@@ -33,6 +34,7 @@ const DoctorManage: NextPage = () => {
 	const user = useReactiveVar(userVar);
 	const [myDoctor, setMyDoctor] = useState<Doctor | null>(null);
 	const [schedules, setSchedules] = useState<DoctorSchedule[]>([]);
+	const [hospitals, setHospitals] = useState<any[]>([]);
 	const [profileForm, setProfileForm] = useState<any>({
 		specialization: Specialization.OTHER,
 		licenseNumber: '',
@@ -40,6 +42,7 @@ const DoctorManage: NextPage = () => {
 		consultationFee: 0,
 		education: '',
 		certificates: '',
+		hospitalId: '',
 	});
 	const [slotForm, setSlotForm] = useState<any>({
 		dayOfWeek: DayOfWeek.MONDAY,
@@ -66,9 +69,36 @@ const DoctorManage: NextPage = () => {
 		onCompleted: (data: T) => setSchedules(data?.getDoctorSchedules?.list ?? []),
 	});
 
+	useQuery(GET_HOSPITALS, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: { page: 1, limit: 100, sort: 'createdAt', direction: 'DESC', search: {} } },
+		onCompleted: (data: T) => setHospitals(data?.getHospitals?.list ?? []),
+	});
+
 	const [createDoctor] = useMutation(CREATE_DOCTOR);
+	const [updateDoctor] = useMutation(UPDATE_DOCTOR);
 	const [createDoctorSchedule] = useMutation(CREATE_DOCTOR_SCHEDULE);
 	const [removeDoctorSchedule] = useMutation(REMOVE_DOCTOR_SCHEDULE);
+
+	const [editHospitalId, setEditHospitalId] = useState<string>('');
+	useEffect(() => {
+		setEditHospitalId(myDoctor?.hospitalId ?? '');
+	}, [myDoctor]);
+
+	const updateHospitalHandler = async () => {
+		try {
+			if (!myDoctor?._id) return;
+			await updateDoctor({
+				variables: { input: { _id: myDoctor._id, hospitalId: editHospitalId || undefined } },
+			});
+			await sweetMixinSuccessAlert('Hospital updated!');
+			const res = await refetchDoctors();
+			const mine = (res?.data?.getDoctors?.list ?? []).find((d: Doctor) => d.memberData?._id === user?._id);
+			setMyDoctor(mine ?? null);
+		} catch (err: any) {
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
 
 	/** HANDLERS **/
 	const createProfileHandler = async () => {
@@ -83,6 +113,7 @@ const DoctorManage: NextPage = () => {
 						consultationFee: Number(profileForm.consultationFee) || undefined,
 						education: profileForm.education || undefined,
 						certificates: profileForm.certificates || undefined,
+						hospitalId: profileForm.hospitalId || undefined,
 					},
 				},
 			});
@@ -163,6 +194,22 @@ const DoctorManage: NextPage = () => {
 						))}
 					</TextField>
 					<TextField
+						select
+						label="Hospital"
+						value={profileForm.hospitalId}
+						onChange={(e) => setProfileForm({ ...profileForm, hospitalId: e.target.value })}
+						helperText="Select the hospital you work at"
+					>
+						<MenuItem value="">
+							<em>Not selected</em>
+						</MenuItem>
+						{hospitals.map((h) => (
+							<MenuItem key={h._id} value={h._id}>
+								{h.hospitalTitle}
+							</MenuItem>
+						))}
+					</TextField>
+					<TextField
 						label="License number"
 						value={profileForm.licenseNumber}
 						onChange={(e) => setProfileForm({ ...profileForm, licenseNumber: e.target.value })}
@@ -205,6 +252,29 @@ const DoctorManage: NextPage = () => {
 					</Stack>
 					<Typography color="text.secondary">License: {myDoctor.licenseNumber}</Typography>
 					<Typography color="text.secondary">Consultation fee: ${myDoctor.consultationFee}</Typography>
+					<Divider sx={{ my: 1 }} />
+					<Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
+						<TextField
+							select
+							label="Hospital"
+							size="small"
+							value={editHospitalId}
+							onChange={(e) => setEditHospitalId(e.target.value)}
+							sx={{ minWidth: 260 }}
+						>
+							<MenuItem value="">
+								<em>Not selected</em>
+							</MenuItem>
+							{hospitals.map((h) => (
+								<MenuItem key={h._id} value={h._id}>
+									{h.hospitalTitle}
+								</MenuItem>
+							))}
+						</TextField>
+						<Button variant="outlined" onClick={updateHospitalHandler}>
+							Save hospital
+						</Button>
+					</Stack>
 				</Stack>
 			)}
 

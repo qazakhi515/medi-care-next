@@ -214,7 +214,6 @@ const Filter = (props: FilterType) => {
 					</Stack>
 				</Stack>
 				<Stack className={'find-your-home'} mb={'30px'}>
-					<Typography className={'title'}>Hospital Type</Typography>
 					<FormControl fullWidth size="small">
 						<InputLabel id="hospital-type-label">Hospital type</InputLabel>
 						<Select

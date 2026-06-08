@@ -618,6 +618,7 @@ export const GET_DOCTOR = gql`
 		getDoctor(doctorId: $input) {
 			_id
 			memberId
+			hospitalId
 			doctorStatus
 			specialization
 			licenseNumber
@@ -649,6 +650,7 @@ export const GET_DOCTORS = gql`
 			list {
 				_id
 				memberId
+				hospitalId
 				doctorStatus
 				specialization
 				licenseNumber

@@ -1,10 +1,11 @@
 import { DoctorStatus, Specialization } from '../../enums/doctor.enum';
 import { Member } from '../member/member';
-import { TotalCounter } from '../hospital/hospital';
+import { Hospital, TotalCounter } from '../hospital/hospital';
 
 export interface Doctor {
 	_id: string;
 	memberId: string;
+	hospitalId?: string;
 	doctorStatus: DoctorStatus;
 	specialization: Specialization;
 	licenseNumber: string;
@@ -19,6 +20,7 @@ export interface Doctor {
 	updatedAt: Date;
 	/** from aggregation **/
 	memberData?: Member;
+	hospitalData?: Hospital;
 }
 
 export interface Doctors {

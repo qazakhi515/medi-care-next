@@ -335,6 +335,7 @@ export const CREATE_DOCTOR = gql`
 		createDoctor(input: $input) {
 			_id
 			memberId
+			hospitalId
 			doctorStatus
 			specialization
 			licenseNumber
@@ -352,6 +353,7 @@ export const UPDATE_DOCTOR = gql`
 		updateDoctor(input: $input) {
 			_id
 			memberId
+			hospitalId
 			doctorStatus
 			specialization
 			licenseNumber

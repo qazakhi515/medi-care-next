@@ -28,6 +28,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { GET_COMMENTS, GET_HOSPITALS, GET_HOSPITAL } from '../../apollo/user/query';
+import HospitalDetailSections from '../../libs/components/hospital/HospitalDetailSections';
 import { T } from '../../libs/types/common';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
@@ -642,6 +643,8 @@ const HospitalDetail: NextPage = ({ initialComment, ...props }: any) => {
 								</Stack>
 							</Stack>
 						)}
+
+						{hospital && <HospitalDetailSections hospital={hospital} />}
 					</Stack>
 				</div>
 			</div>
