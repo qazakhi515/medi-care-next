@@ -4,8 +4,7 @@ import Head from 'next/head';
 import Top from '../Top';
 import Footer from '../Footer';
 import { Stack } from '@mui/material';
-import FiberContainer from '../common/FiberContainer';
-import HeaderFilter from '../homepage/HeaderFilter';
+import MediHero from '../homepage/MediHero';
 import { userVar } from '../../../apollo/store';
 import { useReactiveVar } from '@apollo/client';
 import { getJwtToken, updateUserInfo } from '../../auth';
@@ -31,12 +30,16 @@ const withLayoutMain = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>MEDI-CARE</title>
+						<meta name={'title'} content={`MEDI-CARE`} />
 					</Head>
 					<Stack id="mobile-wrap">
 						<Stack id={'top'}>
 							<Top />
+						</Stack>
+
+						<Stack className={'header-main'}>
+							<MediHero />
 						</Stack>
 
 						<Stack id={'main'}>
@@ -53,8 +56,8 @@ const withLayoutMain = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>MEDI-CARE</title>
+						<meta name={'title'} content={`MEDI-CARE`} />
 					</Head>
 					<Stack id="pc-wrap">
 						<Stack id={'top'}>
@@ -62,10 +65,7 @@ const withLayoutMain = (Component: any) => {
 						</Stack>
 
 						<Stack className={'header-main'}>
-							<FiberContainer />
-							<Stack className={'container'}>
-								<HeaderFilter />
-							</Stack>
+							<MediHero />
 						</Stack>
 
 						<Stack id={'main'}>

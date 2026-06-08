@@ -755,8 +755,8 @@ body::-webkit-scrollbar {
 						flex-direction: column;
 
 						.logo {
-							width: 128px;
-							height: 52px;
+							width: 150px;
+							height: auto;
 							cursor: pointer;
 						}
 
@@ -1177,3 +1177,6 @@ body::-webkit-scrollbar {
 	border-radius: 2px;
 	margin-right: 8px;
 }
+
+/** Medi-care homepage redesign — imported last so it overrides legacy homepage/header styles **/
+@import '/scss/pc/homepage/medicare-home.scss';

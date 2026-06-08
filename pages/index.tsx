@@ -1,14 +1,11 @@
 import { NextPage } from 'next';
+import { Stack } from '@mui/material';
 import useDeviceDetect from '../libs/hooks/useDeviceDetect';
 import withLayoutMain from '../libs/components/layout/LayoutHome';
-import CommunityBoards from '../libs/components/homepage/CommunityBoards';
+import QuickNav from '../libs/components/homepage/QuickNav';
 import PopularHospitals from '../libs/components/homepage/PopularHospitals';
-import TopAgents from '../libs/components/homepage/TopAgents';
-import Events from '../libs/components/homepage/Events';
-import TrendHospitals from '../libs/components/homepage/TrendHospitals';
-import TopHospitals from '../libs/components/homepage/TopHospitals';
-import { Stack } from '@mui/material';
-import Advertisement from '../libs/components/homepage/Advertisement';
+import FamousDoctors from '../libs/components/homepage/FamousDoctors';
+import AppointmentCTA from '../libs/components/homepage/AppointmentCTA';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps = async ({ locale }: any) => ({
@@ -23,23 +20,19 @@ const Home: NextPage = () => {
 	if (device === 'mobile') {
 		return (
 			<Stack className={'home-page'}>
-				<TrendHospitals />
+				<QuickNav />
 				<PopularHospitals />
-				<Advertisement />
-				<TopHospitals />
-				<TopAgents />
+				<FamousDoctors />
+				<AppointmentCTA />
 			</Stack>
 		);
 	} else {
 		return (
 			<Stack className={'home-page'}>
-				<TrendHospitals />
+				<QuickNav />
 				<PopularHospitals />
-				<Advertisement />
-				<TopHospitals />
-				<TopAgents />
-				<Events />
-				<CommunityBoards />
+				<FamousDoctors />
+				<AppointmentCTA />
 			</Stack>
 		);
 	}

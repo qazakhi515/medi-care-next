@@ -50,7 +50,7 @@ const MyHospitals: NextPage = ({ initialInput, ...props }: any) => {
 	};
 
 	if (device === 'mobile') {
-		return <div>NESTAR HOSPITALS MOBILE</div>;
+		return <div>MEDI-CARE HOSPITALS MOBILE</div>;
 	} else {
 		return (
 			<div id="member-hospitals-page">

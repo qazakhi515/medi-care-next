@@ -46,7 +46,7 @@ const PopularHospitals = (props: PopularHospitalsProps) => {
 			<Stack className={'popular-hospitals'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<span>Popular hospitals</span>
+						<span>Popular Hospitals</span>
 					</Stack>
 					<Stack className={'card-box'}>
 						<Swiper
@@ -74,13 +74,13 @@ const PopularHospitals = (props: PopularHospitalsProps) => {
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
 						<Box component={'div'} className={'left'}>
-							<span>Popular hospitals</span>
-							<p>Popularity is based on views</p>
+							<span>Popular Hospitals</span>
+							<p>Most visited hospitals on Medi-care</p>
 						</Box>
 						<Box component={'div'} className={'right'}>
 							<div className={'more-box'}>
 								<Link href={'/hospital'}>
-									<span>See All Categories</span>
+									<span>See All Hospitals</span>
 								</Link>
 								<img src="/img/icons/rightup.svg" alt="" />
 							</div>

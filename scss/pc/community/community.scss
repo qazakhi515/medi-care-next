@@ -24,10 +24,9 @@
 						flex-direction: row;
 						gap: 11px;
 						img {
-							width: 80px;
-							height: 80px;
-							border-radius: 50%;
-							object-fit: cover;
+							width: auto;
+							height: 56px;
+							object-fit: contain;
 						}
 						.community-name {
 							.name {

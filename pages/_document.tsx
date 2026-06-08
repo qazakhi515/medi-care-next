@@ -5,7 +5,7 @@ export default function Document() {
 		<Html lang="en">
 			<Head>
 				<meta name="robots" content="index,follow" />
-				<link rel="icon" type="image/png" href="/img/logo/favicon.svg" />
+				<link rel="icon" type="image/png" href="/img/logo/favicon.png" />
 
 				{/* SEO */}
 				<meta name="keyword" content={'medi-care, medicare, hospital, doctor, appointment, healthcare platform'} />

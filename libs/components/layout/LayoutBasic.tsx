@@ -31,7 +31,17 @@ const withLayoutBasic = (Component: any) => {
 				case '/hospital':
 					title = 'Hospital Search';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/hospitals.png';
+					bgImage = '/img/nextPage.png';
+					break;
+				case '/doctor':
+					title = 'Doctors';
+					desc = 'Meet our experienced specialists';
+					bgImage = '/img/nextPage.png';
+					break;
+				case '/appointment':
+					title = 'Appointments';
+					desc = 'Book a visit with the right doctor';
+					bgImage = '/img/nextPage.png';
 					break;
 				case '/agent':
 					title = 'Agents';
@@ -46,12 +56,12 @@ const withLayoutBasic = (Component: any) => {
 				case '/mypage':
 					title = 'my page';
 					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header1.svg';
+					bgImage = '/img/myPageCommCS.jpg';
 					break;
 				case '/community':
 					title = 'Community';
 					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/myPageCommCS.jpg';
 					break;
 				case '/community/detail':
 					title = 'Community Detail';
@@ -61,7 +71,7 @@ const withLayoutBasic = (Component: any) => {
 				case '/cs':
 					title = 'CS';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/myPageCommCS.jpg';
 					break;
 				case '/account/join':
 					title = 'Login/Signup';
@@ -93,8 +103,8 @@ const withLayoutBasic = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>MEDI-CARE</title>
+						<meta name={'title'} content={`MEDI-CARE`} />
 					</Head>
 					<Stack id="mobile-wrap">
 						<Stack id={'top'}>
@@ -115,8 +125,8 @@ const withLayoutBasic = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>MEDI-CARE</title>
+						<meta name={'title'} content={`MEDI-CARE`} />
 					</Head>
 					<Stack id="pc-wrap">
 						<Stack id={'top'}>
