@@ -1,7 +1,7 @@
 import React from 'react';
 import { Stack, Box } from '@mui/material';
 import { useRouter } from 'next/router';
-import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
+import AnimatedAppointmentIcon from '../common/AnimatedAppointmentIcon';
 
 /** AppointmentCTA — quiet closing band inviting patients to book a visit. */
 const AppointmentCTA = () => {
@@ -17,7 +17,7 @@ const AppointmentCTA = () => {
 				</Box>
 				<Box component={'div'} className={'action'}>
 					<button onClick={() => router.push('/appointment')}>
-						<EventAvailableOutlinedIcon /> Book Appointment
+						<AnimatedAppointmentIcon /> Book Appointment
 					</button>
 				</Box>
 			</Stack>

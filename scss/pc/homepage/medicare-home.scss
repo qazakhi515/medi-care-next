@@ -5,6 +5,84 @@
  *  so the redesigned sections take precedence.
  *  ========================================================= */
 
+/** Appointment "alarm" icon — subtle looping shake + soft pulse (CSS) */
+@keyframes appointmentAlarm {
+	0%,
+	70%,
+	100% {
+		transform: rotate(0) scale(1);
+	}
+	10% {
+		transform: rotate(-8deg) scale(1.06);
+	}
+	20% {
+		transform: rotate(8deg) scale(1.06);
+	}
+	30% {
+		transform: rotate(-6deg) scale(1.04);
+	}
+	40% {
+		transform: rotate(6deg) scale(1.04);
+	}
+	50% {
+		transform: rotate(0) scale(1.02);
+	}
+}
+
+.appointment-alarm-icon {
+	display: inline-block;
+	transform-origin: center;
+	animation: appointmentAlarm 1.8s ease-in-out infinite;
+}
+
+/** Quick-nav tile icons — gentle, distinct subtle motions */
+@keyframes qnPulse {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.08);
+	}
+}
+@keyframes qnSway {
+	0%,
+	100% {
+		transform: rotate(0);
+	}
+	25% {
+		transform: rotate(-6deg);
+	}
+	75% {
+		transform: rotate(6deg);
+	}
+}
+@keyframes qnBob {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-4px);
+	}
+}
+
+.qn-icon-pulse,
+.qn-icon-sway,
+.qn-icon-bob {
+	display: inline-block;
+	transform-origin: center;
+}
+.qn-icon-pulse {
+	animation: qnPulse 2.4s ease-in-out infinite;
+}
+.qn-icon-sway {
+	animation: qnSway 2.8s ease-in-out infinite;
+}
+.qn-icon-bob {
+	animation: qnBob 2.6s ease-in-out infinite;
+}
+
 $mc-olive-deep: #4f5641;
 $mc-olive: #6b7256;
 $mc-sage: #8a9a7b;

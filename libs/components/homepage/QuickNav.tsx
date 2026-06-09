@@ -3,7 +3,7 @@ import { Stack, Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import StethoscopeIcon from '@mui/icons-material/MedicalServicesOutlined';
-import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
+import AnimatedAppointmentIcon from '../common/AnimatedAppointmentIcon';
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 
 interface QuickNavTile {
@@ -18,25 +18,25 @@ const TILES: QuickNavTile[] = [
 		label: 'Hospitals',
 		caption: 'Browse trusted hospitals',
 		href: '/hospital',
-		icon: <LocalHospitalOutlinedIcon />,
+		icon: <LocalHospitalOutlinedIcon className="qn-icon-pulse" />,
 	},
 	{
 		label: 'Doctors',
 		caption: 'Meet our specialists',
 		href: '/doctor',
-		icon: <StethoscopeIcon />,
+		icon: <StethoscopeIcon className="qn-icon-sway" />,
 	},
 	{
 		label: 'Appointments',
 		caption: 'Book a visit by schedule',
 		href: '/appointment',
-		icon: <EventAvailableOutlinedIcon />,
+		icon: <AnimatedAppointmentIcon />,
 	},
 	{
 		label: 'My Profile',
 		caption: 'Manage your patient record',
 		href: '/patient-profile',
-		icon: <AssignmentIndOutlinedIcon />,
+		icon: <AssignmentIndOutlinedIcon className="qn-icon-bob" />,
 	},
 ];
 

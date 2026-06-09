@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import SearchIcon from '@mui/icons-material/Search';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
-import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
+import AnimatedAppointmentIcon from '../common/AnimatedAppointmentIcon';
 
 /**
  * MediHero — calm, clinic-style homepage hero.
@@ -64,7 +64,7 @@ const MediHero = () => {
 							<LocalHospitalOutlinedIcon /> Find a Hospital
 						</button>
 						<button className={'ghost'} onClick={() => router.push('/appointment')}>
-							<EventAvailableOutlinedIcon /> Book Appointment
+							<AnimatedAppointmentIcon /> Book Appointment
 						</button>
 					</Box>
 				</Box>
