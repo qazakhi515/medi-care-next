@@ -1,6 +1,7 @@
 export enum NotificationType {
 	LIKE = 'LIKE',
 	COMMENT = 'COMMENT',
+	APPOINTMENT = 'APPOINTMENT',
 }
 
 export enum NotificationStatus {
@@ -12,4 +13,5 @@ export enum NotificationGroup {
 	MEMBER = 'MEMBER',
 	ARTICLE = 'ARTICLE',
 	HOSPITAL = 'HOSPITAL',
+	APPOINTMENT = 'APPOINTMENT',
 }

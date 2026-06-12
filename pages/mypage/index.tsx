@@ -8,6 +8,7 @@ import MyHospitals from '../../libs/components/mypage/MyHospitals';
 import MyFavorites from '../../libs/components/mypage/MyFavorites';
 import RecentlyVisited from '../../libs/components/mypage/RecentlyVisited';
 import AddHospital from '../../libs/components/mypage/AddNewHospital';
+import DoctorProfile from '../../libs/components/mypage/DoctorProfile';
 import MyProfile from '../../libs/components/mypage/MyProfile';
 import MyArticles from '../../libs/components/mypage/MyArticles';
 import { useMutation, useReactiveVar } from '@apollo/client';
@@ -119,6 +120,7 @@ const MyPage: NextPage = () => {
 							<Stack className="main-config" mb={'76px'}>
 								<Stack className={'list-config'}>
 									{category === 'addHospital' && <AddHospital />}
+									{category === 'doctorProfile' && <DoctorProfile />}
 									{category === 'myHospitals' && <MyHospitals />}
 									{category === 'myFavorites' && <MyFavorites />}
 									{category === 'recentlyVisited' && <RecentlyVisited />}

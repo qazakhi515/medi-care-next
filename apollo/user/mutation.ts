@@ -499,3 +499,32 @@ export const UPDATE_PATIENT_PROFILE = gql`
 		}
 	}
 `;
+
+/**************************
+ *     FORGOT PASSWORD    *
+ *************************/
+
+export const FORGOT_PASSWORD = gql`
+	mutation ForgotPassword($input: ForgotPasswordInput!) {
+		forgotPassword(input: $input)
+	}
+`;
+
+export const RESET_PASSWORD = gql`
+	mutation ResetPassword($input: ResetPasswordInput!) {
+		resetPassword(input: $input)
+	}
+`;
+
+/**************************
+ *      NOTIFICATION      *
+ *************************/
+
+export const UPDATE_NOTIFICATION = gql`
+	mutation UpdateNotification($input: NotificationUpdate!) {
+		updateNotification(input: $input) {
+			_id
+			notificationStatus
+		}
+	}
+`;

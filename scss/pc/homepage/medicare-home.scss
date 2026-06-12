@@ -127,7 +127,7 @@ $mc-card-shadow: 0 10px 30px rgba(47, 51, 39, 0.08);
 	.hero-inner {
 		position: relative;
 		width: 100%;
-		max-width: 1280px;
+		max-width: 1300px;
 		margin: 0 auto;
 		padding: 80px 40px;
 		min-height: 600px;
@@ -291,7 +291,7 @@ $mc-card-shadow: 0 10px 30px rgba(47, 51, 39, 0.08);
 		flex-wrap: wrap;
 		gap: 24px;
 		width: 100%;
-		max-width: 1280px;
+		max-width: 1300px;
 		margin: 0 auto;
 		padding: 0 40px;
 		box-sizing: border-box;
@@ -366,7 +366,8 @@ $mc-card-shadow: 0 10px 30px rgba(47, 51, 39, 0.08);
 		> .container {
 			flex-direction: column;
 			width: 100%;
-			max-width: 1280px;
+			min-width: 0;
+			max-width: 1300px;
 			margin: 0 auto;
 			padding: 0 40px;
 			box-sizing: border-box;
@@ -428,6 +429,9 @@ $mc-card-shadow: 0 10px 30px rgba(47, 51, 39, 0.08);
 		.card-box {
 			position: relative;
 			width: 100%;
+			min-width: 0;
+			max-width: 100%;
+			overflow: hidden;
 			margin-top: 36px;
 
 			.empty-list {
@@ -468,7 +472,7 @@ $mc-card-shadow: 0 10px 30px rgba(47, 51, 39, 0.08);
 
 	/* Hospital slide + card */
 	.popular-hospital-slide {
-		width: 360px;
+		width: 280px;
 		height: auto;
 	}
 

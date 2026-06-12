@@ -128,7 +128,7 @@ const DoctorList: NextPage = ({ initialInput, ...props }: any) => {
 DoctorList.defaultProps = {
 	initialInput: {
 		page: 1,
-		limit: 9,
+		limit: 6,
 		sort: 'createdAt',
 		direction: 'DESC',
 		search: {},

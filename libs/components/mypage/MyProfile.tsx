@@ -16,6 +16,7 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 	const token = getJwtToken();
 	const user = useReactiveVar(userVar);
 	const [updateData, setUpdateData] = useState<MemberUpdate>(initialValues);
+	const [passwordData, setPasswordData] = useState({ newPassword: '', confirmPassword: '' });
 
 	/** APOLLO REQUESTS **/
 	const [updateMember] = useMutation(UPDATE_MEMBER);
@@ -95,6 +96,39 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 			sweetErrorHandling(err).then();
 		}
 	}, [updateData]);
+
+	const changePasswordHandler = useCallback(async () => {
+		try {
+			if (!user?._id) throw new Error(Messages.error2);
+			if (!passwordData.newPassword || !passwordData.confirmPassword) throw new Error(Messages.error3);
+			if (passwordData.newPassword.length < 5 || passwordData.newPassword.length > 12)
+				throw new Error('Password must be 5-12 characters!');
+			if (passwordData.newPassword !== passwordData.confirmPassword) throw new Error('Passwords do not match!');
+
+			const result = await updateMember({
+				variables: {
+					input: { _id: user._id, memberPassword: passwordData.newPassword },
+				},
+			});
+
+			// @ts-ignore
+			const jwtToken = result.data.updateMember?.accessToken;
+			await updateStorage({ jwtToken });
+			updateUserInfo(jwtToken);
+			await sweetMixinSuccessAlert('Password changed successfully.');
+			setPasswordData({ newPassword: '', confirmPassword: '' });
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+	}, [passwordData, user]);
+
+	const passwordDisabledCheck = () => {
+		return (
+			!passwordData.newPassword ||
+			!passwordData.confirmPassword ||
+			passwordData.newPassword !== passwordData.confirmPassword
+		);
+	};
 
 	const doDisabledCheck = () => {
 		if (
@@ -194,6 +228,43 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 									</clipPath>
 								</defs>
 							</svg>
+						</Button>
+					</Stack>
+				</Stack>
+				<Stack className="main-title-box">
+					<Stack className="right-box">
+						<Typography className="main-title">Change Password</Typography>
+						<Typography className="sub-title">Update your account password.</Typography>
+					</Stack>
+				</Stack>
+				<Stack className="top-box">
+					<Stack className="small-input-box">
+						<Stack className="input-box">
+							<Typography className="title">New Password</Typography>
+							<input
+								type="password"
+								placeholder="Enter new password (5-12 chars)"
+								value={passwordData.newPassword}
+								onChange={({ target: { value } }) => setPasswordData({ ...passwordData, newPassword: value })}
+							/>
+						</Stack>
+						<Stack className="input-box">
+							<Typography className="title">Confirm Password</Typography>
+							<input
+								type="password"
+								placeholder="Repeat new password"
+								value={passwordData.confirmPassword}
+								onChange={({ target: { value } }) => setPasswordData({ ...passwordData, confirmPassword: value })}
+							/>
+						</Stack>
+					</Stack>
+					<Stack className="about-me-box">
+						<Button
+							className="update-button"
+							onClick={changePasswordHandler}
+							disabled={passwordDisabledCheck()}
+						>
+							<Typography>Change Password</Typography>
 						</Button>
 					</Stack>
 				</Stack>

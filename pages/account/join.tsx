@@ -1,10 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import { Box, Button, Checkbox, FormControlLabel, FormGroup, Stack } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useRouter } from 'next/router';
 import { logIn, signUp } from '../../libs/auth';
+import ForgotPassword from '../../libs/components/account/ForgotPassword';
 import { sweetMixinErrorAlert } from '../../libs/sweetAlert';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -14,11 +17,24 @@ export const getStaticProps = async ({ locale }: any) => ({
 	},
 });
 
+const LOGIN_BG_IMAGES = ['/img/banner/rasm1.jpg', '/img/banner/rasm2.jpg', '/img/banner/rasm4.jpg'];
+
 const Join: NextPage = () => {
 	const router = useRouter();
 	const device = useDeviceDetect();
 	const [input, setInput] = useState({ nick: '', password: '', phone: '', type: 'PATIENT' });
 	const [loginView, setLoginView] = useState<boolean>(true);
+	const [forgotView, setForgotView] = useState<boolean>(false);
+	const [showPassword, setShowPassword] = useState<boolean>(false);
+	const [bgIndex, setBgIndex] = useState<number>(0);
+
+	/** Fon rasmlari uzluksiz birin-ketin almashadi (slayd-shou) **/
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			setBgIndex((prev) => (prev + 1) % LOGIN_BG_IMAGES.length);
+		}, 4000);
+		return () => clearInterval(intervalId);
+	}, []);
 
 	/** HANDLERS **/
 	const viewChangeHandler = (state: boolean) => {
@@ -75,6 +91,10 @@ const Join: NextPage = () => {
 							<Box className={'logo'}>
 								<img src="/img/logo/logo.png" alt="MEDI-CARE" />
 							</Box>
+							{forgotView ? (
+								<ForgotPassword onBack={() => setForgotView(false)} />
+							) : (
+								<>
 							<Box className={'info'}>
 								<span>{loginView ? 'login' : 'signup'}</span>
 								<p>{loginView ? 'Login' : 'Sign'} in with this account across the following sites.</p>
@@ -87,6 +107,7 @@ const Join: NextPage = () => {
 										placeholder={'Enter Nickname (3-12 chars)'}
 										minLength={3}
 										maxLength={12}
+										autoComplete="off"
 										onChange={(e) => handleInput('nick', e.target.value)}
 										required={true}
 										onKeyDown={(event) => {
@@ -97,18 +118,36 @@ const Join: NextPage = () => {
 								</div>
 								<div className={'input-box'}>
 									<span>Password</span>
-									<input
-										type="password"
-										placeholder={'Enter Password (5-12 chars)'}
-										minLength={5}
-										maxLength={12}
-										onChange={(e) => handleInput('password', e.target.value)}
-										required={true}
-										onKeyDown={(event) => {
-											if (event.key == 'Enter' && loginView) doLogin();
-											if (event.key == 'Enter' && !loginView) doSignUp();
-										}}
-									/>
+									<div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+										<input
+											type={showPassword ? 'text' : 'password'}
+											placeholder={'Enter Password (5-12 chars)'}
+											minLength={5}
+											maxLength={12}
+											autoComplete="new-password"
+											onChange={(e) => handleInput('password', e.target.value)}
+											required={true}
+											onKeyDown={(event) => {
+												if (event.key == 'Enter' && loginView) doLogin();
+												if (event.key == 'Enter' && !loginView) doSignUp();
+											}}
+											style={{ paddingRight: 44 }}
+										/>
+										<span
+											onClick={() => setShowPassword((prev) => !prev)}
+											style={{
+												position: 'absolute',
+												right: 14,
+												display: 'flex',
+												alignItems: 'center',
+												cursor: 'pointer',
+												color: '#717171',
+												marginBottom: 0,
+											}}
+										>
+											{showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+										</span>
+									</div>
 								</div>
 								{!loginView && (
 									<div className={'input-box'}>
@@ -165,7 +204,9 @@ const Join: NextPage = () => {
 										<FormGroup>
 											<FormControlLabel control={<Checkbox defaultChecked size="small" />} label="Remember me" />
 										</FormGroup>
-										<a>Lost your password?</a>
+										<a style={{ cursor: 'pointer' }} onClick={() => setForgotView(true)}>
+												Lost your password?
+											</a>
 									</div>
 								)}
 
@@ -208,8 +249,13 @@ const Join: NextPage = () => {
 									</p>
 								)}
 							</Box>
+								</>
+							)}
 						</Stack>
-						<Stack className={'right'}></Stack>
+						<Stack
+							className={'right'}
+							style={{ backgroundImage: `url(${LOGIN_BG_IMAGES[bgIndex]})`, backgroundPosition: 'center' }}
+						></Stack>
 					</Stack>
 				</Stack>
 			</Stack>

@@ -13,10 +13,52 @@ import { CaretDown } from 'phosphor-react';
 import useDeviceDetect from '../hooks/useDeviceDetect';
 import Link from 'next/link';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { useReactiveVar } from '@apollo/client';
+import { useReactiveVar, useQuery, useMutation } from '@apollo/client';
 import { userVar } from '../../apollo/store';
+import { GET_NOTIFICATIONS } from '../../apollo/user/query';
+import { UPDATE_NOTIFICATION } from '../../apollo/user/mutation';
+import { NotificationStatus } from '../enums/notification.enum';
+import { Notification } from '../types/notification/notification';
 import { Logout } from '@mui/icons-material';
 import { REACT_APP_API_URL } from '../config';
+
+const StyledMenu = styled((props: MenuProps) => (
+	<Menu
+		elevation={0}
+		anchorOrigin={{
+			vertical: 'bottom',
+			horizontal: 'right',
+		}}
+		transformOrigin={{
+			vertical: 'top',
+			horizontal: 'right',
+		}}
+		{...props}
+	/>
+))(({ theme }) => ({
+	'& .MuiPaper-root': {
+		top: '109px',
+		borderRadius: 6,
+		marginTop: theme.spacing(1),
+		minWidth: 160,
+		color: theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
+		boxShadow:
+			'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+		'& .MuiMenu-list': {
+			padding: '4px 0',
+		},
+		'& .MuiMenuItem-root': {
+			'& .MuiSvgIcon-root': {
+				fontSize: 18,
+				color: theme.palette.text.secondary,
+				marginRight: theme.spacing(1.5),
+			},
+			'&:active': {
+				backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+			},
+		},
+	},
+}));
 
 const Top = () => {
 	const device = useDeviceDetect();
@@ -32,6 +74,30 @@ const Top = () => {
 	const [bgColor, setBgColor] = useState<boolean>(false);
 	const [logoutAnchor, setLogoutAnchor] = React.useState<null | HTMLElement>(null);
 	const logoutOpen = Boolean(logoutAnchor);
+	const [notifOpen, setNotifOpen] = useState<boolean>(false);
+	const [notifications, setNotifications] = useState<Notification[]>([]);
+
+	/** NOTIFICATIONS **/
+	const { refetch: refetchNotifications } = useQuery(GET_NOTIFICATIONS, {
+		fetchPolicy: 'network-only',
+		variables: { input: { page: 1, limit: 50 } },
+		skip: !user?._id,
+		onCompleted: (data: any) => setNotifications(data?.getNotifications?.list ?? []),
+	});
+	const [updateNotification] = useMutation(UPDATE_NOTIFICATION);
+	const unreadCount = notifications.filter((n) => n.notificationStatus === NotificationStatus.WAIT).length;
+
+	const markNotificationReadHandler = async (notif: Notification) => {
+		try {
+			if (notif.notificationStatus !== NotificationStatus.WAIT) return;
+			await updateNotification({
+				variables: { input: { _id: notif._id, notificationStatus: NotificationStatus.READ } },
+			});
+			await refetchNotifications();
+		} catch (err: any) {
+			console.log('Error, markNotificationReadHandler:', err.message);
+		}
+	};
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -97,47 +163,10 @@ const Top = () => {
 		}
 	};
 
-	const StyledMenu = styled((props: MenuProps) => (
-		<Menu
-			elevation={0}
-			anchorOrigin={{
-				vertical: 'bottom',
-				horizontal: 'right',
-			}}
-			transformOrigin={{
-				vertical: 'top',
-				horizontal: 'right',
-			}}
-			{...props}
-		/>
-	))(({ theme }) => ({
-		'& .MuiPaper-root': {
-			top: '109px',
-			borderRadius: 6,
-			marginTop: theme.spacing(1),
-			minWidth: 160,
-			color: theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
-			boxShadow:
-				'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
-			'& .MuiMenu-list': {
-				padding: '4px 0',
-			},
-			'& .MuiMenuItem-root': {
-				'& .MuiSvgIcon-root': {
-					fontSize: 18,
-					color: theme.palette.text.secondary,
-					marginRight: theme.spacing(1.5),
-				},
-				'&:active': {
-					backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
-				},
-			},
-		},
-	}));
-
-	if (typeof window !== 'undefined') {
+	useEffect(() => {
 		window.addEventListener('scroll', changeNavbarColor);
-	}
+		return () => window.removeEventListener('scroll', changeNavbarColor);
+	}, []);
 
 	if (device == 'mobile') {
 		return (
@@ -236,7 +265,86 @@ const Top = () => {
 							)}
 
 							<div className={'lan-box'}>
-								{user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />}
+								{user?._id && (
+									<div style={{ position: 'relative', display: 'inline-flex' }}>
+										<NotificationsOutlinedIcon
+											className={'notification-icon'}
+											style={{ cursor: 'pointer' }}
+											onClick={() => setNotifOpen((prev) => !prev)}
+										/>
+										{unreadCount > 0 && (
+											<span
+												style={{
+													position: 'absolute',
+													top: -6,
+													right: -6,
+													minWidth: 16,
+													height: 16,
+													padding: '0 4px',
+													borderRadius: 8,
+													background: '#eb6753',
+													color: '#fff',
+													fontSize: 10,
+													fontWeight: 700,
+													display: 'flex',
+													alignItems: 'center',
+													justifyContent: 'center',
+												}}
+											>
+												{unreadCount}
+											</span>
+										)}
+										{notifOpen && (
+											<div
+												style={{
+													position: 'absolute',
+													top: 34,
+													right: 0,
+													width: 320,
+													maxHeight: 400,
+													overflowY: 'auto',
+													background: '#fff',
+													borderRadius: 10,
+													boxShadow: '0 8px 28px rgba(0,0,0,0.15)',
+													zIndex: 1000,
+													padding: 8,
+												}}
+											>
+												<div style={{ padding: '8px 10px', fontWeight: 700, fontSize: 14, borderBottom: '1px solid #eee' }}>
+													Notifications
+												</div>
+												{notifications.length === 0 ? (
+													<div style={{ padding: 16, color: '#888', fontSize: 13, textAlign: 'center' }}>
+														No notifications
+													</div>
+												) : (
+													notifications.map((n) => (
+														<div
+															key={n._id}
+															onClick={() => markNotificationReadHandler(n)}
+															style={{
+																padding: 10,
+																borderRadius: 8,
+																cursor: 'pointer',
+																background:
+																	n.notificationStatus === NotificationStatus.WAIT ? '#f4f8ff' : 'transparent',
+															}}
+														>
+															<div style={{ fontWeight: 600, fontSize: 13, color: '#181a20' }}>
+																{n.notificationTitle}
+															</div>
+															{n.notificationDesc && (
+																<div style={{ fontSize: 12, color: '#717171', marginTop: 2 }}>
+																	{n.notificationDesc}
+																</div>
+															)}
+														</div>
+													))
+												)}
+											</div>
+										)}
+									</div>
+								)}
 								<Button
 									disableRipple
 									className="btn-lang"

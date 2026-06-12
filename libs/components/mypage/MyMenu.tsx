@@ -55,13 +55,36 @@ const MyMenu = () => {
 					</Stack>
 				</Stack>
 				<Stack className={'sections'}>
-					<Stack className={'section'} style={{ height: user.memberType === 'DOCTOR' ? '228px' : '153px' }}>
+					<Stack className={'section'} style={{ height: user.memberType === 'DOCTOR' ? '266px' : '153px' }}>
 						<Typography className="title" variant={'h5'}>
 							MANAGE LISTINGS
 						</Typography>
 						<List className={'sub-section'}>
 							{user.memberType === 'DOCTOR' && (
 								<>
+									<ListItem className={pathname === 'doctorProfile' ? 'focus' : ''}>
+										<Link
+											href={{
+												pathname: '/mypage',
+												query: { category: 'doctorProfile' },
+											}}
+											scroll={false}
+										>
+											<div className={'flex-box'}>
+												{category === 'doctorProfile' ? (
+													<img className={'com-icon'} src={'/img/icons/userWhite.svg'} alt={'com-icon'} />
+												) : (
+													<img className={'com-icon'} src={'/img/icons/user.svg'} alt={'com-icon'} />
+												)}
+												<Typography className={'sub-title'} variant={'subtitle1'} component={'p'}>
+													Doctor Profile
+												</Typography>
+												<IconButton aria-label="delete" sx={{ ml: '38px' }}>
+													<PortraitIcon style={{ color: 'red' }} />
+												</IconButton>
+											</div>
+										</Link>
+									</ListItem>
 									<ListItem className={pathname === 'addHospital' ? 'focus' : ''}>
 										<Link
 											href={{
