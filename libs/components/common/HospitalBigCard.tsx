@@ -49,26 +49,8 @@ const HospitalBigCard = (props: HospitalBigCardProps) => {
 				<Box component={'div'} className={'info'}>
 					<strong className={'title'}>{hospital?.hospitalTitle}</strong>
 					<p className={'desc'}>{hospital?.hospitalAddress}</p>
-					<div className={'options'}>
-						<div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{hospital?.hospitalBeds} bed</span>
-						</div>
-						<div>
-							<img src="/img/icons/room.svg" alt="" />
-							<span>{hospital?.hospitalRooms} rooms</span>
-						</div>
-						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{hospital?.hospitalSquare} m2</span>
-						</div>
-					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<div>
-							{hospital?.hospitalRent ? <p>Rent</p> : <span>Rent</span>}
-							{hospital?.hospitalBarter ? <p>Barter</p> : <span>Barter</span>}
-						</div>
 						<div className="buttons-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />

@@ -2,9 +2,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
-import KingBedOutlinedIcon from '@mui/icons-material/KingBedOutlined';
-import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined';
-import SquareFootOutlinedIcon from '@mui/icons-material/SquareFootOutlined';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import { Hospital } from '../../types/hospital/hospital';
@@ -65,32 +62,6 @@ const PopularHospitalCard = (props: PopularHospitalCardProps) => {
 				</p>
 
 				<div className="ph-divider" />
-
-				<div className="ph-stats">
-					<div className="ph-stat">
-						<KingBedOutlinedIcon className="ph-stat-icon" style={{ fontSize: 22 }} />
-						<div>
-							<b>{hospital?.hospitalBeds ?? 0}</b>
-							<small>Beds</small>
-						</div>
-					</div>
-					<div className="ph-vline" />
-					<div className="ph-stat">
-						<MeetingRoomOutlinedIcon className="ph-stat-icon" style={{ fontSize: 22 }} />
-						<div>
-							<b>{hospital?.hospitalRooms ?? 0}</b>
-							<small>Rooms</small>
-						</div>
-					</div>
-					<div className="ph-vline" />
-					<div className="ph-stat">
-						<SquareFootOutlinedIcon className="ph-stat-icon" style={{ fontSize: 22 }} />
-						<div>
-							<b>{hospital?.hospitalSquare ?? 0}</b>
-							<small>m²</small>
-						</div>
-					</div>
-				</div>
 
 				<div className="ph-btn">
 					<span>View Hospital</span>

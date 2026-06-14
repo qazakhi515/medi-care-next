@@ -50,7 +50,7 @@ const MediHero = () => {
 						<input
 							type={'text'}
 							value={keyword}
-							placeholder={'Search hospitals, departments or care…'}
+							placeholder={'Search hospitals by name or city…'}
 							onChange={(e) => setKeyword(e.target.value)}
 							onKeyDown={(e) => {
 								if (e.key === 'Enter') pushSearchHandler();

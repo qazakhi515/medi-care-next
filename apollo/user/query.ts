@@ -864,3 +864,21 @@ export const GET_NOTIFICATIONS = gql`
 		}
 	}
 `;
+
+/**************************
+ *   DOCTOR AVAILABILITY  *
+ *************************/
+
+export const GET_DOCTOR_AVAILABILITY = gql`
+	query GetDoctorAvailability($input: DoctorAvailabilityInput!) {
+		getDoctorAvailability(input: $input) {
+			doctorId
+			date
+			isWorkingDay
+			slots {
+				startTime
+				endTime
+			}
+		}
+	}
+`;

@@ -43,26 +43,8 @@ const TrendHospitalCard = (props: TrendHospitalCardProps) => {
 						{hospital.hospitalTitle}
 					</strong>
 					<p className={'desc'}>{hospital.hospitalDesc ?? 'no description'}</p>
-					<div className={'options'}>
-						<div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{hospital.hospitalBeds} bed</span>
-						</div>
-						<div>
-							<img src="/img/icons/room.svg" alt="" />
-							<span>{hospital.hospitalRooms} rooms</span>
-						</div>
-						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{hospital.hospitalSquare} m2</span>
-						</div>
-					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<p>
-							{hospital.hospitalRent ? 'Rent' : ''} {hospital.hospitalRent && hospital.hospitalBarter && '/'}{' '}
-							{hospital.hospitalBarter ? 'Barter' : ''}
-						</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />
@@ -97,26 +79,8 @@ const TrendHospitalCard = (props: TrendHospitalCardProps) => {
 						{hospital.hospitalTitle}
 					</strong>
 					<p className={'desc'}>{hospital.hospitalDesc ?? 'no description'}</p>
-					<div className={'options'}>
-						<div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{hospital.hospitalBeds} bed</span>
-						</div>
-						<div>
-							<img src="/img/icons/room.svg" alt="" />
-							<span>{hospital.hospitalRooms} rooms</span>
-						</div>
-						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{hospital.hospitalSquare} m2</span>
-						</div>
-					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<p>
-							{hospital.hospitalRent ? 'Rent' : ''} {hospital.hospitalRent && hospital.hospitalBarter && '/'}{' '}
-							{hospital.hospitalBarter ? 'Barter' : ''}
-						</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />

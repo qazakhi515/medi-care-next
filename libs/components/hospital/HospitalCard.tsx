@@ -69,33 +69,8 @@ const HospitalCard = (props: HospitalCardType) => {
 							</Typography>
 						</Stack>
 					</Stack>
-					<Stack className="options">
-						<Stack className="option">
-							<img src="/img/icons/bed.svg" alt="" /> <Typography>{hospital.hospitalBeds} bed</Typography>
-						</Stack>
-						<Stack className="option">
-							<img src="/img/icons/room.svg" alt="" /> <Typography>{hospital.hospitalRooms} room</Typography>
-						</Stack>
-						<Stack className="option">
-							<img src="/img/icons/expand.svg" alt="" /> <Typography>{hospital.hospitalSquare} m2</Typography>
-						</Stack>
-					</Stack>
 					<Stack className="divider"></Stack>
 					<Stack className="type-buttons">
-						<Stack className="type">
-							<Typography
-								sx={{ fontWeight: 500, fontSize: '13px' }}
-								className={hospital.hospitalRent ? '' : 'disabled-type'}
-							>
-								Rent
-							</Typography>
-							<Typography
-								sx={{ fontWeight: 500, fontSize: '13px' }}
-								className={hospital.hospitalBarter ? '' : 'disabled-type'}
-							>
-								Barter
-							</Typography>
-						</Stack>
 						{!recentlyVisited && (
 							<Stack className="buttons">
 								<IconButton color={'default'}>

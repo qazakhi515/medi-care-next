@@ -1,10 +1,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import BiotechOutlinedIcon from '@mui/icons-material/BiotechOutlined';
-import KingBedOutlinedIcon from '@mui/icons-material/KingBedOutlined';
-import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
-import SquareFootOutlinedIcon from '@mui/icons-material/SquareFootOutlined';
 import { Hospital } from '../../types/hospital/hospital';
 
 interface HospitalEquipmentProps {
@@ -22,15 +19,6 @@ const HospitalEquipment = ({ hospital }: HospitalEquipmentProps) => {
 
 	if (hospital?.hospitalType) {
 		stats.push({ icon: <LocalHospitalOutlinedIcon />, label: 'Department', value: String(hospital.hospitalType) });
-	}
-	if (hospital?.hospitalBeds) {
-		stats.push({ icon: <KingBedOutlinedIcon />, label: 'Inpatient beds', value: `${hospital.hospitalBeds}` });
-	}
-	if (hospital?.hospitalRooms) {
-		stats.push({ icon: <MeetingRoomOutlinedIcon />, label: 'Consultation rooms', value: `${hospital.hospitalRooms}` });
-	}
-	if (hospital?.hospitalSquare) {
-		stats.push({ icon: <SquareFootOutlinedIcon />, label: 'Facility area', value: `${hospital.hospitalSquare} m²` });
 	}
 
 	return (
