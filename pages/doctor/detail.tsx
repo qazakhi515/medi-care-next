@@ -111,7 +111,7 @@ const DoctorDetail: NextPage = () => {
 								<Typography color="text.secondary">Experience: {doctor.experienceYears} years</Typography>
 							) : null}
 							<Typography variant="h6" sx={{ fontWeight: 700, mt: 1, color: '#2f3327' }}>
-								Consultation fee: ${formatterStr(doctor?.consultationFee)}
+								Consultation fee: {formatterStr(doctor?.consultationFee)} sum
 							</Typography>
 							<Button
 								variant="contained"

@@ -44,7 +44,7 @@ const HospitalBigCard = (props: HospitalBigCardProps) => {
 						</div>
 					)}
 
-					<div className={'price'}>${formatterStr(hospital?.hospitalPrice)}</div>
+					<div className={'price'}>{formatterStr(hospital?.hospitalPrice)} sum</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
 					<strong className={'title'}>{hospital?.hospitalTitle}</strong>

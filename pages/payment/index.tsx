@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NextPage } from 'next';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import { Stack, Typography, Button, Divider, Chip, MenuItem, Select, Box } from '@mui/material';
+import { Stack, Typography, Button, Divider, Chip, MenuItem, Select } from '@mui/material';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import Moment from 'react-moment';
@@ -76,7 +76,7 @@ const PaymentPage: NextPage = () => {
 					<Typography variant="h5" sx={{ fontWeight: 700 }}>
 						Pending payments
 					</Typography>
-					<Box>
+					<div>
 						<Typography variant="caption" color="text.secondary" sx={{ mr: 1 }}>
 							Method
 						</Typography>
@@ -87,7 +87,7 @@ const PaymentPage: NextPage = () => {
 								</MenuItem>
 							))}
 						</Select>
-					</Box>
+					</div>
 				</Stack>
 				<Divider />
 				{!user?._id ? (
@@ -126,7 +126,7 @@ const PaymentPage: NextPage = () => {
 					payments.map((p) => (
 						<Stack key={p._id} direction="row" justifyContent="space-between" alignItems="center" sx={{ p: 2, border: '1px solid #eee', borderRadius: '8px' }}>
 							<Stack>
-								<Typography sx={{ fontWeight: 600 }}>${formatterStr(p.amount)}</Typography>
+								<Typography sx={{ fontWeight: 600 }}>{formatterStr(p.amount)} sum</Typography>
 								<Typography variant="body2" color="text.secondary">
 									{p.paymentMethod} · <Moment format="DD MMM YYYY">{p.createdAt}</Moment>
 								</Typography>

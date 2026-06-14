@@ -62,7 +62,7 @@ export const HospitalCard = (props: HospitalCardProps) => {
 					<Typography className="name">{hospital.hospitalTitle}</Typography>
 					<Typography className="address">{hospital.hospitalAddress}</Typography>
 					<Typography className="price">
-						<strong>${formatterStr(hospital?.hospitalPrice)}</strong>
+						<strong>{formatterStr(hospital?.hospitalPrice)} sum</strong>
 					</Typography>
 				</Stack>
 				<Stack className="date-box">

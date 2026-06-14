@@ -249,7 +249,7 @@ const AppointmentPage: NextPage = () => {
 										<div className="doctor-name">{doctorName(d)}</div>
 										<div className="doctor-spec">{d.specialization}</div>
 										<div className="doctor-meta">
-											{d.experienceYears} yrs · ${d.consultationFee}
+											{d.experienceYears} yrs · {d.consultationFee} sum
 										</div>
 									</div>
 								))}
@@ -347,7 +347,7 @@ const AppointmentPage: NextPage = () => {
 							</div>
 							<div className="confirm-row">
 								<span>Fee</span>
-								<b>${selectedDoctor.consultationFee}</b>
+								<b>{selectedDoctor.consultationFee} sum</b>
 							</div>
 						</div>
 

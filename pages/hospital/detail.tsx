@@ -254,7 +254,7 @@ const HospitalDetail: NextPage = ({ initialComment, ...props }: any) => {
 											<Typography>{hospital?.hospitalLikes}</Typography>
 										</Stack>
 									</Stack>
-									<Typography>${formatterStr(hospital?.hospitalPrice)}</Typography>
+									<Typography>{formatterStr(hospital?.hospitalPrice)} sum</Typography>
 								</Stack>
 							</Stack>
 							<Stack className={'images'}>
@@ -324,7 +324,7 @@ const HospitalDetail: NextPage = ({ initialComment, ...props }: any) => {
 											<Stack className={'left'}>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Price</Typography>
-													<Typography className={'data'}>${formatterStr(hospital?.hospitalPrice)}</Typography>
+													<Typography className={'data'}>{formatterStr(hospital?.hospitalPrice)} sum</Typography>
 												</Box>
 											</Stack>
 											<Stack className={'right'}>

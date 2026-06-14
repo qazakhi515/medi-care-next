@@ -48,7 +48,7 @@ const HospitalCard = (props: HospitalCardType) => {
 						</Box>
 					)}
 					<Box component={'div'} className={'price-box'}>
-						<Typography>${formatterStr(hospital?.hospitalPrice)}</Typography>
+						<Typography>{formatterStr(hospital?.hospitalPrice)} sum</Typography>
 					</Box>
 				</Stack>
 				<Stack className="bottom">

@@ -37,7 +37,7 @@ const TopHospitalCard = (props: TopHospitalCardProps) => {
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${hospital?.hospitalImages[0]})` }}
 					onClick={() => pushDetailHandler(hospital._id)}
 				>
-					<div>${hospital?.hospitalPrice}</div>
+					<div>{hospital?.hospitalPrice} sum</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
 					<strong className={'title'} onClick={() => pushDetailHandler(hospital._id)}>
@@ -73,7 +73,7 @@ const TopHospitalCard = (props: TopHospitalCardProps) => {
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${hospital?.hospitalImages[0]})` }}
 					onClick={() => pushDetailHandler(hospital._id)}
 				>
-					<div>${hospital?.hospitalPrice}</div>
+					<div>{hospital?.hospitalPrice} sum</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
 					<strong className={'title'} onClick={() => pushDetailHandler(hospital._id)}>

@@ -9,6 +9,7 @@ import { userVar } from '../../../apollo/store';
 import { useReactiveVar } from '@apollo/client';
 import { getJwtToken, updateUserInfo } from '../../auth';
 import Chat from '../Chat';
+import DrAiButton from '../DrAiButton';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -73,6 +74,7 @@ const withLayoutMain = (Component: any) => {
 						</Stack>
 
 						<Chat />
+						<DrAiButton />
 
 						<Stack id={'footer'}>
 							<Footer />

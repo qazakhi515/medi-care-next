@@ -528,3 +528,19 @@ export const UPDATE_NOTIFICATION = gql`
 		}
 	}
 `;
+
+/**************************
+ *       MEDICAL AI       *
+ *************************/
+
+export const ASK_MEDICAL_AI = gql`
+	mutation AskMedicalAi($input: MedicalAiInput!) {
+		askMedicalAi(input: $input) {
+			answer
+			urgencyLevel
+			suggestedSpecialization
+			shouldBookAppointment
+			safetyNotice
+		}
+	}
+`;
