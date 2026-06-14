@@ -1,0 +1,10 @@
+services:
+  medi-care-next:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: medi-care-next
+    container_name: medi-care-next
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
