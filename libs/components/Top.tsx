@@ -169,26 +169,52 @@ const Top = () => {
 	}, []);
 
 	if (device == 'mobile') {
+		const isActive = (path: string) => router.pathname === path;
 		return (
 			<Stack className={'top'}>
-				<Link href={'/'}>
-					<div>{t('Home')}</div>
-				</Link>
-				<Link href={'/hospital'}>
-					<div>{t('Hospitals')}</div>
-				</Link>
-				<Link href={'/doctor'}>
-					<div> {t('Agents')} </div>
-				</Link>
-				<Link href={'/appointment'}>
-					<div> Appointments </div>
-				</Link>
-				<Link href={'/community?articleCategory=FREE'}>
-					<div> {t('Community')} </div>
-				</Link>
-				<Link href={'/cs'}>
-					<div> {t('CS')} </div>
-				</Link>
+				<Box component={'div'} className={'mobile-logo-box'}>
+					<Link href={'/'}>
+						<img src="/img/logo/logoWhite.png" alt="MEDI-CARE" />
+					</Link>
+					{user?._id ? (
+						<Link href={'/mypage'} className={'mobile-user'}>
+							<img
+								src={user?.memberImage ? `${REACT_APP_API_URL}/${user?.memberImage}` : '/img/profile/defaultUser.svg'}
+								alt=""
+							/>
+						</Link>
+					) : (
+						<Link href={'/account/join'} className={'mobile-join'}>
+							<AccountCircleOutlinedIcon />
+							<span>{t('Login')}</span>
+						</Link>
+					)}
+				</Box>
+				<Box component={'div'} className={'mobile-nav'}>
+					<Link href={'/'} className={isActive('/') ? 'active' : ''}>
+						<span>{t('Home')}</span>
+					</Link>
+					<Link href={'/hospital'} className={isActive('/hospital') ? 'active' : ''}>
+						<span>{t('Hospitals')}</span>
+					</Link>
+					<Link href={'/doctor'} className={isActive('/doctor') ? 'active' : ''}>
+						<span>{t('Agents')}</span>
+					</Link>
+					<Link href={'/appointment'} className={isActive('/appointment') ? 'active' : ''}>
+						<span>Appointments</span>
+					</Link>
+					<Link href={'/community?articleCategory=FREE'} className={isActive('/community') ? 'active' : ''}>
+						<span>{t('Community')}</span>
+					</Link>
+					{user?._id && (
+						<Link href={'/mypage'} className={isActive('/mypage') ? 'active' : ''}>
+							<span>{t('My Page')}</span>
+						</Link>
+					)}
+					<Link href={'/cs'} className={isActive('/cs') ? 'active' : ''}>
+						<span>{t('CS')}</span>
+					</Link>
+				</Box>
 			</Stack>
 		);
 	} else {
