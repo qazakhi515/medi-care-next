@@ -193,6 +193,7 @@ const Chat = () => {
 						onChange={getInputMessageHandler}
 						onKeyDown={getKeyHandler}
 					/>
+
 					<button className={'send-msg-btn'} onClick={onClickHandler}>
 						<SendIcon style={{ color: '#fff' }} />
 					</button>
