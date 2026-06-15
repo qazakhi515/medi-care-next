@@ -7,7 +7,6 @@ import { Doctor } from '../../types/doctor/doctor';
 import { DoctorStatus } from '../../enums/doctor.enum';
 import { T } from '../../types/common';
 import HospitalAbout from './HospitalAbout';
-import HospitalDoctorSchedule from './HospitalDoctorSchedule';
 import HospitalGallery from './HospitalGallery';
 import HospitalEquipment from './HospitalEquipment';
 import HospitalLocationMap from './HospitalLocationMap';
@@ -19,7 +18,7 @@ interface HospitalDetailSectionsProps {
 /**
  * HospitalDetailSections — single additive entry point appended to the hospital
  * detail page. Fetches active doctors once and renders the four new sections:
- * About Hospital, Doctor Schedule, Hospital Gallery, Address & Map.
+ * About Hospital, Hospital Gallery, Hospital Equipment, Address & Map.
  * Self-contained; touches no existing page logic, queries, layout or styles.
  */
 const HospitalDetailSections = ({ hospital }: HospitalDetailSectionsProps) => {
@@ -49,7 +48,6 @@ const HospitalDetailSections = ({ hospital }: HospitalDetailSectionsProps) => {
 			<HospitalAbout hospital={hospital} doctors={doctors} />
 			<HospitalGallery images={hospital?.hospitalImages} title={hospital?.hospitalTitle} />
 			<HospitalEquipment hospital={hospital} />
-			<HospitalDoctorSchedule doctors={doctors} />
 			<HospitalLocationMap hospital={hospital} />
 		</Stack>
 	);

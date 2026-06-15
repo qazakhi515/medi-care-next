@@ -139,6 +139,9 @@ const PopularHospitalCard = (props: PopularHospitalCardProps) => {
 					font-size: 19px;
 					font-weight: 800;
 					color: #1f2a24;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 				}
 				.ph-addr {
 					display: flex;

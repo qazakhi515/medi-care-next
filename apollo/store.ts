@@ -25,3 +25,6 @@ export const userVar = makeVar<CustomJwtPayload>({
 });
 //@ts-ignore
 export const socketWar = makeVar<WebSocket>();
+
+/** Live-chat open state — shared so the floating Dr. AI button can hide while the chat is open. */
+export const chatOpenVar = makeVar<boolean>(false);

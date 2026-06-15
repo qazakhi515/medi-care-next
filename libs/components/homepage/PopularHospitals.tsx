@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper';
-import WestIcon from '@mui/icons-material/West';
-import EastIcon from '@mui/icons-material/East';
+import { Autoplay } from 'swiper';
 import PopularHospitalCard from './PopularHospitalCard';
 import { Hospital } from '../../types/hospital/hospital';
 import Link from 'next/link';
@@ -91,14 +89,7 @@ const PopularHospitals = (props: PopularHospitalsProps) => {
 							className={'popular-hospital-swiper'}
 							slidesPerView={'auto'}
 							spaceBetween={25}
-							modules={[Autoplay, Navigation, Pagination]}
-							navigation={{
-								nextEl: '.swiper-popular-next',
-								prevEl: '.swiper-popular-prev',
-							}}
-							pagination={{
-								el: '.swiper-popular-pagination',
-							}}
+							modules={[Autoplay]}
 						>
 							{popularHospitals.map((hospital: Hospital) => {
 								return (
@@ -108,11 +99,6 @@ const PopularHospitals = (props: PopularHospitalsProps) => {
 								);
 							})}
 						</Swiper>
-					</Stack>
-					<Stack className={'pagination-box'}>
-						<WestIcon className={'swiper-popular-prev'} />
-						<div className={'swiper-popular-pagination'}></div>
-						<EastIcon className={'swiper-popular-next'} />
 					</Stack>
 				</Stack>
 			</Stack>

@@ -1,342 +1,393 @@
 #pc-wrap {
 	#hospital-detail-page {
 		position: relative;
-		background: #fff;
 		padding-top: 87px;
 		padding-bottom: 200px;
+		background: #fff;
+
 		.hospital-detail-config {
+			gap: 30px;
 			width: 100%;
 			height: auto;
 			padding-top: 56px;
-			gap: 30px;
+
 			.hospital-info-config {
+				gap: 30px;
 				width: 100%;
 				height: auto;
-				gap: 30px;
+
 				.info {
-					width: 100%;
-					height: auto;
 					flex-direction: row;
 					justify-content: space-between;
+					width: 100%;
+					height: auto;
+
 					.left-box {
 						width: 50%;
 						height: auto;
+
 						.title-main {
-							color: #181a20;
 							font-family: $font;
 							font-size: 30px;
-							font-style: normal;
 							font-weight: 600;
+							font-style: normal;
 							line-height: normal;
 							letter-spacing: 0.6px;
 							text-transform: capitalize;
+							color: #181a20;
 						}
+
 						.top-box {
-							width: auto;
-							height: auto;
 							flex-direction: row;
 							align-items: center;
 							gap: 10px;
+							width: auto;
+							height: auto;
 							margin-bottom: 17px;
+
 							.city {
-								color: #717171;
 								font-family: $font;
 								font-size: 13px;
-								font-style: normal;
 								font-weight: 400;
+								font-style: normal;
 								line-height: normal;
+								color: #717171;
 							}
+
 							.divider {
 								width: 1px;
 								height: 20px;
 								background: #ddd;
 							}
+
 							.buy-rent-box {
 								flex-direction: row;
 								align-items: center;
 								gap: 7px;
+
 								.buy-rent {
-									color: #eb6753;
 									font-family: $font;
 									font-size: 15px;
-									font-style: normal;
 									font-weight: 600;
+									font-style: normal;
 									line-height: normal;
+									color: #eb6753;
 								}
 							}
+
 							.date {
-								color: #181a20;
 								font-family: $font;
 								font-size: 15px;
-								font-style: normal;
 								font-weight: 400;
+								font-style: normal;
 								line-height: 28px;
+								color: #181a20;
 							}
 						}
+
 						.bottom-box {
-							width: auto;
-							height: auto;
 							flex-direction: row;
 							gap: 15px;
+							width: auto;
+							height: auto;
+
 							.option {
-								width: auto;
-								height: auto;
 								flex-direction: row;
 								gap: 8px;
+								width: auto;
+								height: auto;
+
 								p {
-									color: #181a20;
 									font-family: $font;
 									font-size: 15px;
-									font-style: normal;
 									font-weight: 400;
+									font-style: normal;
 									line-height: normal;
+									color: #181a20;
 								}
 							}
 						}
 					}
+
 					.right-box {
+						align-items: flex-end;
 						width: auto;
 						height: auto;
-						align-items: flex-end;
+
 						.buttons {
-							width: auto;
-							height: auto;
 							flex-direction: row;
 							align-items: center;
 							gap: 11px;
+							width: auto;
+							height: auto;
 							margin: 0 10px 27px 0;
+
 							p {
-								color: #181a20;
-								text-align: right;
 								font-family: $font;
 								font-size: 18px;
-								font-style: normal;
 								font-weight: 400;
+								font-style: normal;
 								line-height: normal;
 								letter-spacing: 0.52px;
+								text-align: right;
 								text-transform: capitalize;
+								color: #181a20;
 							}
+
 							.button-box {
 								flex-direction: row;
-								gap: 5px;
 								align-items: center;
+								gap: 5px;
 							}
 						}
+
 						img {
 							width: 28px;
 							height: 27px;
 						}
+
 						svg {
 							width: 28px;
 							height: 27px;
 							cursor: pointer;
 						}
+
 						p {
-							color: #181a20;
-							text-align: right;
 							font-family: $font;
 							font-size: 26px;
-							font-style: normal;
 							font-weight: 600;
+							font-style: normal;
 							line-height: normal;
 							letter-spacing: 0.52px;
-							text-transform: capitalize;
-						}
-						span {
-							color: #181a20;
 							text-align: right;
+							text-transform: capitalize;
+							color: #181a20;
+						}
+
+						span {
 							font-family: $font;
 							font-size: 15px;
-							font-style: normal;
 							font-weight: 400;
+							font-style: normal;
 							line-height: normal;
 							letter-spacing: 0.3px;
+							text-align: right;
 							text-transform: capitalize;
+							color: #181a20;
 						}
 					}
 				}
+
 				.images {
+					gap: 10px;
 					width: 100%;
 					height: auto;
-					gap: 10px;
+
 					.main-image {
 						width: 100%;
 						height: 600px;
+
 						img {
 							width: 100%;
 							height: 100%;
-							object-fit: cover;
 							border-radius: 12px;
+							object-fit: cover;
 						}
 					}
+
 					.sub-images {
-						width: 100%;
-						height: auto;
 						flex-direction: row;
 						gap: 10px;
+						width: 100%;
+						height: auto;
+
 						.sub-img-box {
 							width: 120px;
 							height: 120px;
 							cursor: pointer;
+
 							img {
 								width: 100%;
 								height: 100%;
-								object-fit: cover;
 								border-radius: 12px;
+								object-fit: cover;
 							}
 						}
 					}
 				}
 			}
+
 			.hospital-desc-config {
-				width: 100%;
-				height: auto;
 				flex-direction: row;
 				gap: 22px;
+				width: 100%;
+				height: auto;
+
 				.left-config {
+					gap: 40px;
 					width: 960px;
 					height: auto;
-					gap: 40px;
+
 					.options-config {
-						width: 100%;
-						height: auto;
 						flex-direction: row;
 						gap: 47.5px;
+						width: 100%;
+						height: auto;
+
 						.option {
-							width: auto;
-							height: auto;
 							flex-direction: row;
 							gap: 17px;
+							width: auto;
+							height: auto;
+
 							.svg-box {
+								justify-content: center;
+								align-items: center;
 								width: 56px;
 								height: 50px;
-								align-items: center;
-								justify-content: center;
-								border-radius: 12px;
 								border: 1px solid #ddd;
+								border-radius: 12px;
+
 								img {
 									width: 35px;
 									height: auto;
 								}
 							}
+
 							.option-includes {
 								width: auto;
 								height: auto;
+
 								.title {
-									color: #181a20;
 									font-family: $font;
 									font-size: 15px;
-									font-style: normal;
 									font-weight: 600;
+									font-style: normal;
 									line-height: normal;
-								}
-								.option-data {
 									color: #181a20;
+								}
+
+								.option-data {
 									font-family: $font;
 									font-size: 15px;
-									font-style: normal;
 									font-weight: 400;
+									font-style: normal;
 									line-height: normal;
+									color: #181a20;
 								}
 							}
 						}
 					}
+
 					.prop-desc-config {
+						gap: 50px;
 						width: 100%;
 						height: auto;
-						gap: 50px;
 						padding: 29px 38px 50px 38px;
-						border-radius: 12px;
 						border: 1px solid #c4c4c4;
+						border-radius: 12px;
+
 						.top {
+							gap: 30px;
 							width: 100%;
 							height: auto;
-							gap: 30px;
+
 							.title {
-								color: #181a20;
 								font-family: $font;
 								font-size: 17px;
-								font-style: normal;
 								font-weight: 600;
+								font-style: normal;
 								line-height: normal;
-							}
-							.desc {
 								color: #181a20;
+							}
+
+							.desc {
+								max-height: 104px;
 								font-family: $font;
 								font-size: 14px;
-								font-style: normal;
 								font-weight: 400;
+								font-style: normal;
 								line-height: 26px;
-								max-height: 104px;
+								color: #181a20;
 							}
 						}
+
 						.bottom {
+							gap: 30px;
 							width: 100%;
 							height: auto;
-							gap: 30px;
+
 							.title {
-								color: #181a20;
 								font-family: $font;
 								font-size: 17px;
-								font-style: normal;
 								font-weight: 600;
+								font-style: normal;
 								line-height: normal;
+								color: #181a20;
 							}
+
 							.info-box {
-								width: 100%;
-								height: auto;
 								flex-direction: row;
 								gap: 230px;
+								width: 100%;
+								height: auto;
+
 								.left,
 								.right {
 									.info {
-										width: auto;
-										height: auto;
 										display: flex;
 										flex-direction: row;
 										gap: 38px;
+										width: auto;
+										height: auto;
+
 										.title {
 											width: 121px;
-											color: #181a20;
 											font-family: $font;
 											font-size: 14px;
-											font-style: normal;
 											font-weight: 600;
+											font-style: normal;
 											line-height: 35px;
+											color: #181a20;
 										}
+
 										.data {
 											width: 88px;
-											color: #181a20;
 											font-family: $font;
 											font-size: 14px;
-											font-style: normal;
 											font-weight: 400;
+											font-style: normal;
 											line-height: 35px;
+											color: #181a20;
 										}
 									}
 								}
 							}
 						}
 					}
+
 					.floor-plans-config {
+						gap: 30px;
 						width: 100%;
 						height: auto;
-						gap: 30px;
 						padding: 30px 38px;
-						border-radius: 12px;
 						border: 1px solid #c4c4c4;
+						border-radius: 12px;
+
 						.title {
-							color: #181a20;
 							font-family: $font;
 							font-size: 17px;
-							font-style: normal;
 							font-weight: 600;
+							font-style: normal;
 							line-height: normal;
+							color: #181a20;
 						}
+
 						.image-box {
 							width: 100%;
 							height: 510px;
 							border: 1px solid #c4c4c4;
+
 							img {
 								width: 100%;
 								height: 100%;
@@ -344,407 +395,464 @@
 							}
 						}
 					}
+
 					.address-config {
+						gap: 30px;
 						width: 100%;
 						height: auto;
-						gap: 30px;
 						padding: 30px 38px;
-						border-radius: 12px;
 						border: 1px solid #c4c4c4;
+						border-radius: 12px;
+
 						.title {
-							color: #181a20;
 							font-family: $font;
 							font-size: 17px;
-							font-style: normal;
 							font-weight: 600;
+							font-style: normal;
 							line-height: normal;
+							color: #181a20;
 						}
+
 						.map-box {
 							width: 100%;
 							height: 400px;
+
 							iframe {
 								border-radius: 12px;
 							}
 						}
 					}
+
 					.reviews-config {
 						width: 100%;
 						height: auto;
 						padding: 30px 38px 45px 38px;
-						border-radius: 12px;
 						border: 1px solid #c4c4c4;
+						border-radius: 12px;
+
 						.filter-box {
-							width: 100%;
-							height: auto;
 							flex-direction: row;
 							justify-content: space-between;
+							width: 100%;
+							height: auto;
 							margin-bottom: 30px;
+
 							.review-cnt {
-								width: auto;
-								height: auto;
 								flex-direction: row;
 								align-items: center;
 								gap: 12px;
-								.reviews {
-									width: 153.6px;
-									color: #181a20;
-									font-family: $font;
-									font-size: 17px;
-									font-style: normal;
-									font-weight: 600;
-									line-height: normal;
-								}
-							}
-							.select-box {
 								width: auto;
 								height: auto;
+
+								.reviews {
+									width: 153.6px;
+									font-family: $font;
+									font-size: 17px;
+									font-weight: 600;
+									font-style: normal;
+									line-height: normal;
+									color: #181a20;
+								}
+							}
+
+							.select-box {
 								flex-direction: row;
 								gap: 10px;
+								width: auto;
+								height: auto;
+
 								.sort-title {
-									color: #717171;
 									font-family: $font;
 									font-size: 14px;
-									font-style: normal;
 									font-weight: 400;
+									font-style: normal;
 									line-height: 26px;
+									color: #717171;
 								}
+
 								.select-main {
 									width: 140px;
 									border: none;
-									outline: none;
-									color: #181a20;
 									font-family: $font;
 									font-size: 14px;
-									font-style: normal;
 									font-weight: 400;
+									font-style: normal;
 									line-height: 26px;
+									color: #181a20;
+									outline: none;
 								}
 							}
 						}
+
 						.review-list {
+							gap: 20px;
 							width: 100%;
 							height: auto;
-							gap: 20px;
+
 							.review-config {
 								width: 100%;
 								height: auto;
 								padding-bottom: 10px;
 								border-bottom: 1px solid #c4c4c4;
+
 								.review-mb-info {
-									width: 100%;
-									height: auto;
 									flex-direction: row;
 									justify-content: space-between;
+									width: 100%;
+									height: auto;
+
 									.img-name-box {
-										width: 30%;
 										flex-direction: row;
 										align-items: center;
 										gap: 20px;
+										width: 30%;
+
 										.img-box {
+											justify-content: center;
+											align-items: center;
 											width: 65px;
 											height: 65px;
-											align-items: center;
-											justify-content: center;
+											border: 1px solid #b9b9b9;
 											border-radius: 50%;
 											background: #f6f6f6;
-											border: 1px solid #b9b9b9;
 											object-fit: cover;
 										}
+
 										.name {
 											width: 100%;
-											color: #181a20;
 											font-family: $font;
 											font-size: 15px;
-											font-style: normal;
 											font-weight: 600;
+											font-style: normal;
 											line-height: normal;
+											color: #181a20;
 											cursor: pointer;
 										}
+
 										.date {
 											width: 100%;
-											color: #181a20;
 											font-family: $font;
 											font-size: 13px;
-											font-style: normal;
 											font-weight: 400;
+											font-style: normal;
 											line-height: normal;
+											color: #181a20;
 										}
 									}
+
 									.review-stars {
 										padding-top: 10px;
 									}
 								}
+
 								.desc-box {
 									width: 100%;
 									height: auto;
 									margin-top: 15px;
+
 									.description {
-										color: #181a20;
 										font-family: $font;
 										font-size: 14px;
-										font-style: normal;
 										font-weight: 400;
+										font-style: normal;
 										line-height: 26px;
+										color: #181a20;
 									}
 								}
 							}
+
 							.pagination-box {
-								margin-top: 15px;
-								width: 100%;
-								height: auto;
 								display: flex;
 								justify-content: center;
+								width: 100%;
+								height: auto;
+								margin-top: 15px;
 							}
 						}
 					}
+
 					.leave-review-config {
-						border-radius: 12px;
+						padding: 30px 38px;
 						border: 1px solid #c4c4c4;
+						border-radius: 12px;
 						background: #fff;
 						box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
-						padding: 30px 38px;
+
 						.main-title {
-							color: #181a20;
 							font-family: $font;
 							font-size: 17px;
-							font-style: normal;
 							font-weight: 600;
+							font-style: normal;
 							line-height: normal;
+							color: #181a20;
 						}
+
 						.review-title {
 							margin-top: 20px;
-							color: #181a20;
 							font-family: $font;
 							font-size: 14px;
-							font-style: normal;
 							font-weight: 600;
+							font-style: normal;
 							line-height: normal;
+							color: #181a20;
 						}
+
 						textarea {
 							width: 100%;
 							height: 120px;
-							margin-top: 8px;
 							padding: 20px;
-							border-radius: 8px;
 							border: 1px solid #ddd;
-							color: #717171;
+							border-radius: 8px;
+							margin-top: 8px;
 							font-family: $font;
 							font-size: 14px;
-							font-style: normal;
 							font-weight: 400;
+							font-style: normal;
 							line-height: 26px;
+							color: #717171;
 						}
+
 						.submit-btn {
-							width: 100%;
 							display: flex;
 							justify-content: flex-end;
+							width: 100%;
+
 							button:disabled {
 								background: #dfdfdf;
 							}
+
 							.submit-review {
 								display: flex;
-								width: 256px;
-								margin-top: 30px;
-								padding: 16px 30px;
 								justify-content: center;
 								align-items: center;
 								gap: 10px;
-								border-radius: 12px;
+								width: 256px;
+								padding: 16px 30px;
 								border: 1px solid #c4c4c4;
+								border-radius: 12px;
+								margin-top: 30px;
 								cursor: pointer;
+
 								.title {
-									color: #181a20;
 									font-family: $font;
 									font-size: 15px;
-									font-style: normal;
 									font-weight: 600;
+									font-style: normal;
 									line-height: normal;
+									color: #181a20;
 								}
 							}
 						}
 					}
 				}
+
 				.right-config {
+					gap: 20px;
 					width: 318px;
 					height: fit-content;
 					padding: 30px 25px;
-					gap: 20px;
-					border-radius: 12px;
 					border: 1px solid rgba(196, 196, 196, 0.79);
+					border-radius: 12px;
 					background: #fff;
 					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+
 					.info-box {
 						position: relative;
-						width: 100%;
 						gap: 8px;
+						width: 100%;
+
 						.main-title {
-							color: #181a20;
+							margin-bottom: 17px;
 							font-family: $font;
 							font-size: 17px;
-							font-style: normal;
 							font-weight: 600;
+							font-style: normal;
 							line-height: normal;
-							margin-bottom: 17px;
+							color: #181a20;
 						}
+
 						.image-info {
-							width: 100%;
 							flex-direction: row;
 							gap: 18px;
+							width: 100%;
+
 							img {
 								width: 95px;
 								height: 95px;
 								border-radius: 50%;
 								object-fit: cover;
 							}
+
 							.name-phone-listings {
 								gap: 5px;
+
 								.name {
-									color: #181a20;
 									font-family: $font;
 									font-size: 15px;
-									font-style: normal;
 									font-weight: 600;
+									font-style: normal;
 									line-height: normal;
+									color: #181a20;
 								}
+
 								.phone-number {
-									width: 100%;
 									flex-direction: row;
 									align-items: center;
 									gap: 10px;
+									width: 100%;
+
 									.number {
-										color: #181a20;
 										font-family: $font;
 										font-size: 15px;
-										font-style: normal;
 										font-weight: 400;
+										font-style: normal;
 										line-height: 28px;
+										color: #181a20;
 									}
 								}
+
 								.listings {
-									color: #181a20;
 									font-family: $font;
 									font-size: 14px;
-									font-style: normal;
 									font-weight: 600;
+									font-style: normal;
 									line-height: normal;
-									text-decoration-line: underline;
+									color: #181a20;
 								}
 							}
 						}
+
 						.sub-title {
-							color: #181a20;
 							font-family: $font;
 							font-size: 14px;
-							font-style: normal;
 							font-weight: 600;
+							font-style: normal;
 							line-height: normal;
+							color: #181a20;
 						}
+
 						input {
 							width: 100%;
 							height: 55px;
 							padding: 15px;
-							border-radius: 8px;
 							border: 1px solid #ddd;
+							border-radius: 8px;
 							background: #fff;
 							outline: none;
+
 							&::placeholder {
-								color: #717171;
 								font-family: $font;
 								font-size: 14px;
-								font-style: normal;
 								font-weight: 400;
+								font-style: normal;
 								line-height: 26px;
+								color: #717171;
 							}
+
 							&:focus {
 								border: 1px solid black;
 							}
 						}
+
 						textarea {
 							width: 100%;
 							height: 120px;
 							padding: 20px;
-							border-radius: 8px;
 							border: 1px solid #ddd;
+							border-radius: 8px;
 							font-family: $font;
 							font-size: 14px;
-							font-style: normal;
 							font-weight: 400;
+							font-style: normal;
 							line-height: 26px;
+
 							&::placeholder {
-								color: #717171;
 								font-family: $font;
 								font-size: 14px;
-								font-style: normal;
 								font-weight: 400;
+								font-style: normal;
 								line-height: 26px;
+								color: #717171;
 							}
+
 							&:focus {
 								border: 1px solid black;
 							}
 						}
+
 						.send-message {
 							display: flex;
-							width: 100%;
-							padding: 16px 30px;
 							justify-content: center;
 							align-items: center;
 							gap: 10px;
+							width: 100%;
+							padding: 16px 30px;
 							border-radius: 12px;
-							background: #eb6753;
+							background: #f8b519;
+
 							.title {
-								color: #fff;
 								font-family: $font;
 								font-size: 15px;
-								font-style: normal;
 								font-weight: 600;
+								font-style: normal;
 								line-height: normal;
+								color: #fff;
 							}
 						}
 					}
 				}
 			}
+
 			.similar-hospitals-config {
+				gap: 66px;
 				width: 100%;
 				margin-top: 45px;
-				gap: 66px;
+
 				.title-pagination-box {
-					width: 100%;
-					height: auto;
 					flex-direction: row;
 					justify-content: space-between;
 					align-items: flex-end;
+					width: 100%;
+					height: auto;
+
 					.title-box {
 						width: 30%;
+
 						.main-title {
-							color: #181a20;
 							font-family: $font;
 							font-size: 30px;
-							font-style: normal;
 							font-weight: 600;
+							font-style: normal;
 							line-height: normal;
 							letter-spacing: 0.6px;
 							text-transform: capitalize;
-						}
-						.sub-title {
 							color: #181a20;
+						}
+
+						.sub-title {
 							font-family: $font;
 							font-size: 14px;
-							font-style: normal;
 							font-weight: 400;
+							font-style: normal;
 							line-height: 26px;
+							color: #181a20;
 						}
 					}
+
 					.pagination-box {
 						flex-direction: row;
 						align-items: center;
 						gap: 22px;
 					}
 				}
+
 				.cards-box {
 					width: 100%;
 					padding-bottom: 10px;
+
 					.similar-homes-swiper {
 						width: 100%;
+
 						.similar-homes-slide {
 							width: 411px;
 						}

@@ -264,7 +264,21 @@ const AppointmentPage: NextPage = () => {
 						<button type="button" className="back-link" onClick={() => setStep(1)}>
 							← Change doctor
 						</button>
-						{!selectedDoctor ? (
+						{!user?._id ? (
+							<div className="login-gate">
+								<h2 className="wizard-title">Please log in first</h2>
+								<p className="muted">
+									You need to be logged in to view the doctor's schedule and book an appointment.
+								</p>
+								<button
+									type="button"
+									className="primary-btn"
+									onClick={() => router.push(`/account/join?referrer=${encodeURIComponent(router.asPath)}`)}
+								>
+									Log in
+								</button>
+							</div>
+						) : !selectedDoctor ? (
 							<p className="muted">Loading doctor…</p>
 						) : (
 							<>
@@ -516,6 +530,13 @@ const AppointmentPage: NextPage = () => {
 				.muted {
 					color: #8a93a6;
 					font-size: 14px;
+				}
+				.login-gate {
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 12px;
+					padding: 16px 0 6px;
 				}
 				.back-link {
 					align-self: flex-start;

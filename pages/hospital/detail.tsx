@@ -340,12 +340,6 @@ const HospitalDetail: NextPage = ({ initialComment, ...props }: any) => {
 										</Stack>
 									</Stack>
 								</Stack>
-								<Stack className={'floor-plans-config'}>
-									<Typography className={'title'}>Floor Plans</Typography>
-									<Stack className={'image-box'}>
-										<img src={'/img/hospital/floorPlan.png'} alt={'image'} />
-									</Stack>
-								</Stack>
 								<Stack className={'address-config'}>
 									<Typography className={'title'}>Address</Typography>
 									<Stack className={'map-box'}>
@@ -501,45 +495,6 @@ const HospitalDetail: NextPage = ({ initialComment, ...props }: any) => {
 								</Stack>
 							</Stack>
 						</Stack>
-						{destinationHospital.length !== 0 && (
-							<Stack className={'similar-hospitals-config'}>
-								<Stack className={'title-pagination-box'}>
-									<Stack className={'title-box'}>
-										<Typography className={'main-title'}>Destination Hospital</Typography>
-										<Typography className={'sub-title'}>Aliquam lacinia diam quis lacus euismod</Typography>
-									</Stack>
-									<Stack className={'pagination-box'}>
-										<WestIcon className={'swiper-similar-prev'} />
-										<div className={'swiper-similar-pagination'}></div>
-										<EastIcon className={'swiper-similar-next'} />
-									</Stack>
-								</Stack>
-								<Stack className={'cards-box'}>
-									<Swiper
-										className={'similar-homes-swiper'}
-										slidesPerView={'auto'}
-										spaceBetween={35}
-										modules={[Autoplay, Navigation, Pagination]}
-										navigation={{
-											nextEl: '.swiper-similar-next',
-											prevEl: '.swiper-similar-prev',
-										}}
-										pagination={{
-											el: '.swiper-similar-pagination',
-										}}
-									>
-										{destinationHospital.map((hospital: Hospital) => {
-											return (
-												<SwiperSlide className={'similar-homes-slide'} key={hospital.hospitalTitle}>
-													<HospitalBigCard hospital={hospital} key={hospital?._id} />
-												</SwiperSlide>
-											);
-										})}
-									</Swiper>
-								</Stack>
-							</Stack>
-						)}
-
 						{hospital && <HospitalDetailSections hospital={hospital} />}
 					</Stack>
 				</div>

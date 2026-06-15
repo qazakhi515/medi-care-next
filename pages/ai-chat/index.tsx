@@ -53,7 +53,9 @@ const AiChatPage: NextPage = () => {
 	const [askMedicalAi, { loading }] = useMutation(ASK_MEDICAL_AI);
 
 	useEffect(() => {
-		bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+		// Don't auto-scroll on first load (empty chat) — that pushed the whole page down.
+		if (messages.length === 0) return;
+		bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 	}, [messages, loading]);
 
 	/** HANDLERS **/

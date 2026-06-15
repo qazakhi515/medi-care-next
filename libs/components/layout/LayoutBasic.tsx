@@ -44,6 +44,11 @@ const withLayoutBasic = (Component: any) => {
 					desc = 'Book a visit with the right doctor';
 					bgImage = '/img/nextPage.png';
 					break;
+				case '/ai-chat':
+					title = 'AI Assistant';
+					desc = 'Chat with our Medical AI assistant';
+					bgImage = '/img/banner/aicon.jpg';
+					break;
 				case '/agent':
 					title = 'Agents';
 					desc = 'Home / For Rent';

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useReactiveVar } from '@apollo/client';
+import { chatOpenVar } from '../../apollo/store';
 
 /**
  * Floating "Dr. AI" button — sits just above the live-chat widget (bottom-right)
@@ -8,6 +10,11 @@ import { useRouter } from 'next/router';
  */
 const DrAiButton = () => {
 	const router = useRouter();
+	const chatOpen = useReactiveVar(chatOpenVar);
+
+	// Hide the floating AI button while the live chat is open so it does not
+	// overlap the chat's send button (both sit in the bottom-right corner).
+	if (chatOpen) return null;
 
 	return (
 		<>

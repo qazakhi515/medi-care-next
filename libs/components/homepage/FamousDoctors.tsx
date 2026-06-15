@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Stack, Box } from '@mui/material';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper';
-import WestIcon from '@mui/icons-material/West';
-import EastIcon from '@mui/icons-material/East';
+import { Autoplay } from 'swiper';
 import { useQuery } from '@apollo/client';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import DoctorCard from '../doctor/DoctorCard';
@@ -94,24 +92,12 @@ const FamousDoctors = (props: FamousDoctorsProps) => {
 							className={'famous-doctor-swiper'}
 							slidesPerView={'auto'}
 							spaceBetween={28}
-							modules={[Autoplay, Navigation, Pagination]}
-							navigation={{
-								nextEl: '.swiper-doctor-next',
-								prevEl: '.swiper-doctor-prev',
-							}}
-							pagination={{ el: '.swiper-doctor-pagination' }}
+							modules={[Autoplay]}
 						>
 							{cards}
 						</Swiper>
 					)}
 				</Stack>
-				{famousDoctors.length > 0 && (
-					<Stack className={'pagination-box'}>
-						<WestIcon className={'swiper-doctor-prev'} />
-						<div className={'swiper-doctor-pagination'}></div>
-						<EastIcon className={'swiper-doctor-next'} />
-					</Stack>
-				)}
 			</Stack>
 		</Stack>
 	);

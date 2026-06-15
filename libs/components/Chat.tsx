@@ -8,11 +8,10 @@ import { useRouter } from 'next/router';
 import ScrollableFeed from 'react-scrollable-feed';
 import { RippleBadge } from '../../scss/MaterialTheme/styled';
 import { useReactiveVar } from '@apollo/client';
-import { socketWar, userVar } from '../../apollo/store';
+import { chatOpenVar, socketWar, userVar } from '../../apollo/store';
 import { Member } from '../types/member/member';
 import { Messages, REACT_APP_API_URL } from '../config';
 import { sweetErrorAlert } from '../sweetAlert';
-import { error } from 'console';
 
 const NewMessage = (type: any) => {
 	if (type === 'right') {
@@ -63,12 +62,14 @@ const Chat = () => {
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		(socket.onmessage = (msg) => {
+		if (!socket) return;
+		socket.onmessage = (msg) => {
 			const data = JSON.parse(msg.data);
 			console.log('webSocket message', data);
 			switch (data.event) {
 				case 'info':
 					const newInfo: InfoPayload = data;
+					setOnlineUsers(newInfo.totalClient);
 					break;
 				case 'getMessages':
 					const list: MessagePayload[] = data.list;
@@ -76,13 +77,11 @@ const Chat = () => {
 					break;
 				case 'message':
 					const newMessage: MessagePayload = data;
-					messagesList.push(newMessage);
-					setMessagesList([...messagesList]);
+					setMessagesList((prev) => [...prev, newMessage]);
 					break;
 			}
-		}),
-			[socket, messagesList];
-	});
+		};
+	}, [socket]);
 
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
@@ -93,11 +92,17 @@ const Chat = () => {
 
 	useEffect(() => {
 		setOpenButton(false);
+		setOpen(false);
+		chatOpenVar(false);
 	}, [router.pathname]);
 
 	/** HANDLERS **/
 	const handleOpenChat = () => {
-		setOpen((prevState) => !prevState);
+		setOpen((prevState) => {
+			const next = !prevState;
+			chatOpenVar(next);
+			return next;
+		});
 	};
 
 	const getInputMessageHandler = useCallback(
@@ -120,11 +125,13 @@ const Chat = () => {
 
 	const onClickHandler = () => {
 		if (!messageInput) sweetErrorAlert(Messages.error4);
-		else {
+		else if (!socket || socket.readyState !== WebSocket.OPEN) {
+			sweetErrorAlert(Messages.error4);
+		} else {
 			socket.send(
 				JSON.stringify({
 					event: 'message',
-					text: messageInput,
+					data: messageInput,
 				}),
 			);
 			setMessageInput('');
