@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import { Stack, Box, Typography, Chip, Button, Divider, Avatar } from '@mui/material';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
@@ -34,7 +33,6 @@ const cardStyle: React.CSSProperties = {
 };
 
 const DoctorDetail: NextPage = () => {
-	const device = useDeviceDetect();
 	const router = useRouter();
 	const doctorId = router.query?.id as string;
 	const [doctor, setDoctor] = useState<Doctor | null>(null);
@@ -68,7 +66,6 @@ const DoctorDetail: NextPage = () => {
 		router.push({ pathname: '/appointment', query: { doctorId } });
 	};
 
-	if (device === 'mobile') return <h1>DOCTOR DETAIL MOBILE</h1>;
 	if (!doctor) return <Stack sx={{ minHeight: 400 }} />;
 
 	const imagePath = doctor?.memberData?.memberImage
@@ -96,7 +93,11 @@ const DoctorDetail: NextPage = () => {
 							whileHover={{ scale: 1.03 }}
 							sx={{ borderRadius: '14px', flexShrink: 0 }}
 						>
-							<Avatar src={imagePath} sx={{ width: 170, height: 170, borderRadius: '14px' }} variant="rounded" />
+							<Avatar
+								src={imagePath}
+								sx={{ width: { xs: 140, sm: 170 }, height: { xs: 140, sm: 170 }, borderRadius: '14px' }}
+								variant="rounded"
+							/>
 						</Box>
 						<Stack spacing={1.5} sx={{ flex: 1 }}>
 							<Typography variant="h4" sx={{ fontWeight: 700, color: '#2f3327' }}>
@@ -116,7 +117,12 @@ const DoctorDetail: NextPage = () => {
 							<Button
 								variant="contained"
 								size="large"
-								sx={{ width: 'fit-content', mt: 1, background: '#6b7256', '&:hover': { background: '#4f5641' } }}
+								sx={{
+									width: { xs: '100%', sm: 'fit-content' },
+									mt: 1,
+									background: '#6b7256',
+									'&:hover': { background: '#4f5641' },
+								}}
 								onClick={bookHandler}
 							>
 								Book appointment
@@ -191,15 +197,26 @@ const DoctorDetail: NextPage = () => {
 							{Object.values(DayOfWeek).map((day) => {
 								const daySchedules = schedules.filter((s) => s.dayOfWeek === day);
 								return (
-									<Stack key={day} direction="row" spacing={2} alignItems="center">
-										<Typography sx={{ width: 120, fontWeight: 600 }}>{day}</Typography>
-										{daySchedules.length === 0 ? (
-											<Typography color="text.disabled">Closed</Typography>
-										) : (
-											daySchedules.map((s) => (
-												<Chip key={s._id} label={`${s.startTime} - ${s.endTime} (${s.slotDuration}m)`} variant="outlined" />
-											))
-										)}
+									<Stack
+										key={day}
+										direction={{ xs: 'column', sm: 'row' }}
+										spacing={{ xs: 0.5, sm: 2 }}
+										alignItems={{ xs: 'flex-start', sm: 'center' }}
+									>
+										<Typography sx={{ width: { xs: 'auto', sm: 120 }, fontWeight: 600 }}>{day}</Typography>
+										<Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
+											{daySchedules.length === 0 ? (
+												<Typography color="text.disabled">Closed</Typography>
+											) : (
+												daySchedules.map((s) => (
+													<Chip
+														key={s._id}
+														label={`${s.startTime} - ${s.endTime} (${s.slotDuration}m)`}
+														variant="outlined"
+													/>
+												))
+											)}
+										</Stack>
 									</Stack>
 								);
 							})}

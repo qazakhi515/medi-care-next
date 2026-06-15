@@ -926,15 +926,19 @@
 		display: flex;
 		flex-direction: row;
 		width: 100%;
+		max-width: 100%;
 		height: auto;
-		padding: 60px 0px 18px 0px;
+		padding: 28px 0px 18px 0px;
 		background: #181a20;
+		box-sizing: border-box;
 
 		.footer-container {
-			width: 1300px;
+			width: 100%;
+			max-width: 100%;
 			height: auto;
-			padding: 0 10px;
+			padding: 0 16px;
 			margin: 0 auto;
+			box-sizing: border-box;
 
 			.main {
 				display: flex;
@@ -943,8 +947,9 @@
 				.left {
 					display: flex;
 					flex-direction: column;
-					justify-content: space-between;
-					height: 360px;
+					justify-content: flex-start;
+					height: auto;
+					gap: 18px;
 
 					.footer-box {
 						display: flex;
@@ -1030,11 +1035,12 @@
 			.second {
 				display: flex;
 				flex-direction: row;
-				justify-content: space-between;
-				align-items: flex-end;
-				height: 45px;
+				justify-content: center;
+				align-items: center;
+				height: auto;
 				border-top: 1px solid #212329;
-				margin-top: 60px;
+				margin-top: 20px;
+				padding-top: 16px;
 
 				span {
 					font-family: $font;
@@ -1043,6 +1049,1380 @@
 					font-style: normal;
 					line-height: normal;
 					color: #bebdbd;
+				}
+			}
+		}
+	}
+
+	/* ===== HOSPITALS PAGE (mobile) ===== */
+	#hospital-list-page.mobile {
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+		background: #f6f6f6;
+		padding: 16px 14px 40px;
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.m-container {
+			width: 100%;
+			max-width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		.m-toolbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+			width: 100%;
+
+			.m-filter-toggle {
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				height: 40px;
+				padding: 0 14px;
+				border: 1px solid #e0e2e8;
+				border-radius: 10px;
+				background: #fff;
+				color: #181a20;
+				font-family: $font;
+				font-size: 14px;
+				font-weight: 600;
+				cursor: pointer;
+
+				&.active {
+					border-color: #1c4fb3;
+					color: #1c4fb3;
+				}
+			}
+
+			.m-sort {
+				button {
+					height: 40px;
+					padding: 0 12px;
+					border-radius: 10px;
+					background: #fff;
+					border: 1px solid #e0e2e8;
+					color: #181a20;
+					font-family: $font;
+					font-size: 14px;
+					font-weight: 600;
+					text-transform: none;
+				}
+			}
+		}
+
+		.m-filter {
+			width: 100%;
+			max-width: 100%;
+
+			.filter-main {
+				width: 100%;
+				max-width: 100%;
+				padding: 18px 16px;
+				border-radius: 12px;
+				background: #fff;
+				box-shadow: 0 1px 4px 0 rgba(24, 26, 32, 0.07);
+
+				.find-your-home {
+					width: 100%;
+				}
+
+				.title-main {
+					font-family: $font;
+					font-size: 15px;
+					font-weight: 600;
+					color: #181a20;
+					margin-bottom: 10px;
+				}
+
+				.title {
+					font-family: $font;
+					font-size: 14px;
+					font-weight: 600;
+					color: #181a20;
+				}
+
+				.shadow-title {
+					text-shadow: 0px 3px 4px #b9b9b9;
+				}
+
+				.clickable-label {
+					cursor: pointer;
+				}
+
+				.input-box {
+					position: relative;
+					width: 100%;
+					flex-direction: row;
+					align-items: center;
+
+					.search-input {
+						width: 100%;
+						height: 48px;
+						border-radius: 8px;
+						border: 1px solid #ddd;
+						background: #fff;
+						padding-left: 40px;
+						color: #717171;
+						font-family: $font;
+						font-size: 14px;
+					}
+
+					> img {
+						position: absolute;
+						width: 18px;
+						height: 17px;
+						top: 16px;
+						left: 14px;
+					}
+
+					.hospital-checkbox {
+						width: 16px;
+						height: 15px;
+						margin-right: 8px;
+					}
+				}
+
+				.hospital-location {
+					height: auto !important;
+					max-height: 200px;
+					overflow-y: auto;
+				}
+			}
+		}
+
+		.m-list {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			width: 100%;
+
+			.no-data {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 12px;
+				padding: 50px 0;
+
+				img {
+					width: 50px;
+					height: 50px;
+				}
+
+				p {
+					font-family: $font;
+					font-size: 15px;
+					color: #717171;
+				}
+			}
+		}
+
+		.m-card {
+			width: 100%;
+			max-width: 100%;
+			border-radius: 12px;
+			overflow: hidden;
+			background: #fff;
+			box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+
+			.m-card-img {
+				position: relative;
+				width: 100%;
+				height: 190px;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+
+				.m-price {
+					position: absolute;
+					bottom: 12px;
+					left: 12px;
+					padding: 6px 12px;
+					border-radius: 6px;
+					border: 1px solid rgba(255, 255, 255, 0.5);
+					background: #fff;
+					color: #181a20;
+					font-family: $font;
+					font-size: 14px;
+					font-weight: 600;
+				}
+			}
+
+			.m-card-body {
+				padding: 14px 16px 16px;
+
+				.m-title {
+					font-family: $font;
+					font-size: 16px;
+					font-weight: 600;
+					color: #181a20;
+					text-transform: capitalize;
+					margin-bottom: 5px;
+				}
+
+				.m-address {
+					font-family: $font;
+					font-size: 13px;
+					font-weight: 400;
+					color: #717171;
+				}
+
+				.m-divider {
+					width: 100%;
+					height: 1px;
+					background: #eee;
+					margin: 14px 0;
+				}
+
+				.m-meta {
+					display: flex;
+					align-items: center;
+					gap: 22px;
+
+					.m-stat {
+						display: flex;
+						align-items: center;
+						gap: 6px;
+						font-family: $font;
+						font-size: 13px;
+						color: #181a20;
+
+						svg {
+							width: 20px;
+							height: 20px;
+						}
+
+						&.clickable {
+							cursor: pointer;
+						}
+					}
+				}
+			}
+		}
+
+		.m-pagination {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 12px;
+			margin-top: 8px;
+
+			.m-total {
+				font-family: $font;
+				font-size: 14px;
+				color: #181a20;
+			}
+		}
+	}
+
+	/* ===== COMMUNITY PAGE (mobile) ===== */
+	#community-list-page.mobile {
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+		background: #f6f6f6;
+		padding: 16px 14px 40px;
+
+		* {
+			box-sizing: border-box;
+		}
+
+		img {
+			max-width: 100%;
+		}
+
+		.m-container {
+			width: 100%;
+			max-width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		.m-head {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			.m-logo {
+				width: 40px;
+				height: 40px;
+				object-fit: contain;
+			}
+
+			.m-comm-name {
+				font-family: $font;
+				font-size: 17px;
+				font-weight: 700;
+				color: #181a20;
+			}
+		}
+
+		.m-tabs {
+			display: flex;
+			gap: 8px;
+			overflow-x: auto;
+			padding-bottom: 4px;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
+			.m-tab {
+				flex: 0 0 auto;
+				padding: 8px 16px;
+				border: 1px solid #e0e2e8;
+				border-radius: 20px;
+				background: #fff;
+				color: #555e70;
+				font-family: $font;
+				font-size: 13px;
+				font-weight: 600;
+				white-space: nowrap;
+				cursor: pointer;
+
+				&.active {
+					background: #1c4fb3;
+					border-color: #1c4fb3;
+					color: #fff;
+				}
+			}
+		}
+
+		.m-panel-head {
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+			gap: 12px;
+
+			.m-panel-title {
+				flex: 1;
+				min-width: 0;
+
+				.m-title {
+					font-family: $font;
+					font-size: 16px;
+					font-weight: 700;
+					color: #181a20;
+					text-transform: capitalize;
+				}
+
+				.m-sub {
+					margin-top: 3px;
+					font-family: $font;
+					font-size: 12px;
+					color: #8a93a6;
+				}
+			}
+
+			.m-write {
+				flex: 0 0 auto;
+				height: 38px;
+				padding: 0 18px;
+				border: none;
+				border-radius: 8px;
+				background: #1c4fb3;
+				color: #fff;
+				font-family: $font;
+				font-size: 14px;
+				font-weight: 600;
+				cursor: pointer;
+			}
+		}
+
+		.m-list {
+			display: flex;
+			flex-direction: column;
+			gap: 14px;
+			width: 100%;
+
+			.no-data {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 12px;
+				padding: 50px 0;
+
+				img {
+					width: 50px;
+					height: 50px;
+				}
+
+				p {
+					font-family: $font;
+					font-size: 15px;
+					color: #717171;
+				}
+			}
+		}
+
+		.m-card {
+			display: flex;
+			gap: 12px;
+			width: 100%;
+			max-width: 100%;
+			padding: 12px;
+			border-radius: 12px;
+			background: #fff;
+			box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+			cursor: pointer;
+
+			.m-card-img {
+				flex: 0 0 96px;
+				width: 96px;
+				height: 96px;
+				border-radius: 10px;
+				overflow: hidden;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+
+			.m-card-body {
+				flex: 1;
+				min-width: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				gap: 6px;
+
+				.m-nick {
+					font-family: $font;
+					font-size: 12px;
+					font-weight: 600;
+					color: #1c4fb3;
+				}
+
+				.m-card-title {
+					font-family: $font;
+					font-size: 15px;
+					font-weight: 600;
+					color: #181a20;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					line-clamp: 2;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+				}
+
+				.m-card-meta {
+					display: flex;
+					align-items: center;
+					gap: 14px;
+					margin-top: 2px;
+
+					.m-stat {
+						display: flex;
+						align-items: center;
+						gap: 5px;
+						font-family: $font;
+						font-size: 12px;
+						color: #555e70;
+
+						svg {
+							width: 18px;
+							height: 18px;
+						}
+
+						&.clickable {
+							cursor: pointer;
+						}
+					}
+
+					.m-date {
+						margin-left: auto;
+						font-family: $font;
+						font-size: 12px;
+						color: #8a93a6;
+					}
+				}
+			}
+		}
+
+		.m-pagination {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 12px;
+			margin-top: 8px;
+
+			.m-total {
+				font-family: $font;
+				font-size: 14px;
+				color: #181a20;
+			}
+		}
+	}
+
+	/* ===== HOSPITAL DETAIL PAGE (mobile) ===== */
+	#hospital-detail-page {
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+		padding: 16px 14px 40px;
+		background: #fff;
+		overflow-x: hidden;
+
+		* {
+			box-sizing: border-box;
+		}
+		img {
+			max-width: 100%;
+		}
+
+		.container {
+			width: 100%;
+			max-width: 100%;
+		}
+
+		.hospital-detail-config {
+			width: 100%;
+			gap: 24px;
+		}
+
+		/* --- top info + images --- */
+		.hospital-info-config {
+			width: 100%;
+			gap: 16px;
+
+			.info {
+				flex-direction: column;
+				align-items: stretch;
+				gap: 12px;
+
+				.left-box {
+					.title-main {
+						font-size: 22px;
+						font-weight: 700;
+						color: #181a20;
+					}
+					.top-box {
+						flex-direction: row;
+						align-items: center;
+						flex-wrap: wrap;
+						gap: 6px;
+						margin-top: 6px;
+
+						.city {
+							font-size: 14px;
+							color: #181a20;
+						}
+						.divider {
+							display: none;
+						}
+						.date {
+							font-size: 13px;
+							color: #717171;
+						}
+					}
+				}
+
+				.right-box {
+					flex-direction: row;
+					align-items: center;
+					justify-content: space-between;
+
+					.buttons {
+						flex-direction: row;
+						gap: 16px;
+
+						.button-box {
+							flex-direction: row;
+							align-items: center;
+							gap: 5px;
+						}
+					}
+				}
+			}
+
+			.images {
+				width: 100%;
+				gap: 10px;
+
+				.main-image {
+					width: 100%;
+					height: 240px;
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						border-radius: 12px;
+					}
+				}
+
+				.sub-images {
+					flex-direction: row;
+					gap: 10px;
+					overflow-x: auto;
+					padding-bottom: 4px;
+
+					&::-webkit-scrollbar {
+						display: none;
+					}
+
+					.sub-img-box {
+						flex: 0 0 84px;
+						width: 84px;
+						height: 64px;
+
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+							border-radius: 8px;
+						}
+					}
+				}
+			}
+		}
+
+		/* --- description / details / map / reviews / form --- */
+		.hospital-desc-config {
+			flex-direction: column;
+			width: 100%;
+			gap: 26px;
+
+			.left-config,
+			.right-config {
+				width: 100%;
+				max-width: 100%;
+			}
+
+			.options-config {
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 16px;
+
+				.option {
+					flex-direction: row;
+					align-items: center;
+					gap: 10px;
+				}
+			}
+
+			.prop-desc-config {
+				gap: 18px;
+
+				.top .title,
+				.bottom .title {
+					font-size: 18px;
+					font-weight: 700;
+					color: #181a20;
+				}
+				.desc {
+					font-size: 14px;
+					line-height: 1.6;
+					color: #717171;
+				}
+				.info-box {
+					flex-direction: column;
+					gap: 12px;
+
+					.left,
+					.right {
+						width: 100%;
+					}
+				}
+			}
+
+			.address-config {
+				.title {
+					font-size: 18px;
+					font-weight: 700;
+					color: #181a20;
+					margin-bottom: 12px;
+				}
+				.map-box {
+					width: 100%;
+					height: 240px;
+
+					iframe {
+						width: 100%;
+						height: 100%;
+						border: 0;
+						border-radius: 8px;
+					}
+				}
+			}
+
+			.reviews-config {
+				width: 100%;
+
+				.review-list {
+					width: 100%;
+				}
+				.pagination-box {
+					display: flex;
+					justify-content: center;
+				}
+			}
+
+			.leave-review-config {
+				width: 100%;
+
+				.main-title {
+					font-size: 18px;
+					font-weight: 700;
+					color: #181a20;
+				}
+				textarea {
+					width: 100%;
+					min-height: 110px;
+					padding: 12px;
+					border: 1px solid #ddd;
+					border-radius: 8px;
+				}
+				.submit-btn {
+					width: 100%;
+
+					button {
+						width: 100%;
+					}
+				}
+			}
+
+			/* "Get More Information" sidebar hidden on mobile */
+			.right-config {
+				display: none;
+				gap: 16px;
+
+				.info-box {
+					width: 100%;
+					gap: 8px;
+
+					.image-info {
+						flex-direction: row;
+						align-items: center;
+						gap: 12px;
+
+						.member-image {
+							width: 56px;
+							height: 56px;
+							border-radius: 50%;
+							object-fit: cover;
+						}
+					}
+
+					input,
+					textarea {
+						width: 100%;
+						padding: 12px;
+						border: 1px solid #ddd;
+						border-radius: 8px;
+						font-family: $font;
+						font-size: 14px;
+					}
+
+					.send-message {
+						width: 100%;
+					}
+				}
+			}
+		}
+
+		/* About Hospital — reduced spacing on mobile (overrides inline styles) */
+		.hospital-about {
+			margin-top: 20px !important;
+		}
+		.hospital-about-card {
+			padding: 16px !important;
+		}
+		.hospital-about-docs {
+			margin-top: 20px !important;
+		}
+	}
+
+	/* ===== CS / CUSTOMER SUPPORT (mobile) ===== */
+	.cs-page {
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+		padding: 16px 14px 40px;
+		background: #f6f6f6;
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.container {
+			width: 100%;
+			max-width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
+
+		.cs-main-info {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+
+			.info {
+				span {
+					display: block;
+					font-family: $font;
+					font-size: 22px;
+					font-weight: 700;
+					color: #181a20;
+				}
+				p {
+					margin-top: 4px;
+					font-family: $font;
+					font-size: 14px;
+					color: #717171;
+				}
+			}
+
+			.btns {
+				display: flex;
+				gap: 10px;
+
+				div {
+					flex: 1;
+					text-align: center;
+					padding: 10px 0;
+					border: 1px solid #e0e2e8;
+					border-radius: 8px;
+					background: #fff;
+					font-family: $font;
+					font-size: 14px;
+					font-weight: 600;
+					color: #555e70;
+					cursor: pointer;
+
+					&.active {
+						background: #1c4fb3;
+						border-color: #1c4fb3;
+						color: #fff;
+					}
+				}
+			}
+		}
+
+		.cs-content {
+			width: 100%;
+		}
+
+		/* --- Notice --- */
+		.notice-content {
+			width: 100%;
+
+			.title {
+				font-family: $font;
+				font-size: 18px;
+				font-weight: 700;
+				color: #181a20;
+			}
+
+			.main {
+				width: 100%;
+				margin-top: 14px;
+
+				.top {
+					display: none;
+				}
+
+				.bottom {
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+
+					.notice-card {
+						display: flex;
+						flex-wrap: wrap;
+						align-items: center;
+						gap: 8px;
+						width: 100%;
+						padding: 14px;
+						border-radius: 10px;
+						background: #fff;
+						box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+
+						.notice-number {
+							font-size: 13px;
+							font-weight: 700;
+							color: #8a93a6;
+						}
+
+						> div {
+							padding: 3px 10px;
+							border-radius: 6px;
+							background: #1c4fb3;
+							color: #fff;
+							font-size: 11px;
+							font-weight: 700;
+							text-transform: uppercase;
+						}
+
+						.notice-title {
+							flex: 1 1 100%;
+							font-family: $font;
+							font-size: 14px;
+							font-weight: 600;
+							color: #181a20;
+						}
+
+						.notice-date {
+							margin-left: auto;
+							font-family: $font;
+							font-size: 12px;
+							color: #8a93a6;
+						}
+					}
+				}
+			}
+		}
+
+		/* --- FAQ --- */
+		.faq-content {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+
+			.categories {
+				display: flex;
+				gap: 8px;
+				overflow-x: auto;
+				padding-bottom: 4px;
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
+
+				div {
+					flex: 0 0 auto;
+					white-space: nowrap;
+					padding: 8px 14px;
+					border: 1px solid #e0e2e8;
+					border-radius: 20px;
+					background: #fff;
+					font-family: $font;
+					font-size: 13px;
+					font-weight: 600;
+					color: #555e70;
+					cursor: pointer;
+
+					&.active {
+						background: #1c4fb3;
+						border-color: #1c4fb3;
+						color: #fff;
+					}
+				}
+			}
+
+			.wrap {
+				width: 100%;
+
+				.question {
+					.badge {
+						font-size: 18px;
+					}
+				}
+			}
+		}
+	}
+
+	/* ===== LOGIN / SIGNUP (mobile) ===== */
+	.join-page {
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+		padding: 28px 16px 48px;
+		background: #fff;
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.container {
+			width: 100%;
+			max-width: 100%;
+			padding: 0;
+		}
+
+		.main {
+			flex-direction: column;
+			width: 100%;
+		}
+
+		.right {
+			display: none;
+		}
+
+		.left {
+			width: 100%;
+			max-width: 420px;
+			margin: 0 auto;
+			align-items: stretch;
+			padding: 0;
+
+			.logo {
+				display: flex;
+				justify-content: center;
+				margin-bottom: 4px;
+
+				img {
+					width: 150px;
+					height: auto;
+				}
+			}
+
+			.info {
+				text-align: center;
+				margin-top: 8px;
+
+				span {
+					display: block;
+					font-family: $font;
+					font-size: 24px;
+					font-weight: 700;
+					text-transform: capitalize;
+					color: #181a20;
+				}
+
+				p {
+					margin-top: 6px;
+					font-family: $font;
+					font-size: 14px;
+					color: #717171;
+				}
+			}
+
+			.input-wrap {
+				width: 100%;
+				margin-top: 24px;
+
+				.input-box {
+					display: flex;
+					flex-direction: column;
+					width: 100%;
+					margin-top: 16px;
+
+					&:first-child {
+						margin-top: 0;
+					}
+
+					span {
+						margin-bottom: 8px;
+						font-family: $font;
+						font-size: 14px;
+						font-weight: 600;
+						color: #181a20;
+					}
+
+					input {
+						width: 100%;
+						height: 52px;
+						padding: 0 14px;
+						border: 1px solid #ddd;
+						border-radius: 8px;
+						font-family: $font;
+						font-size: 14px;
+						color: #717171;
+						background: #fff;
+					}
+				}
+			}
+
+			.register {
+				width: 100%;
+				margin-top: 24px;
+
+				.type-option {
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					width: 100%;
+					gap: 4px;
+				}
+
+				.remember-info {
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+					align-items: center;
+					width: 100%;
+
+					a {
+						font-family: $font;
+						font-size: 13px;
+						color: #181a20;
+						cursor: pointer;
+					}
+				}
+
+				button {
+					width: 100%;
+					height: 52px;
+					border-radius: 12px;
+					margin-top: 20px;
+					font-family: $font;
+					font-size: 15px;
+					font-weight: 600;
+					color: #fff;
+					background: linear-gradient(270deg, #2a6cdf, #00c6ff, #6a5af9, #2a6cdf);
+
+					img {
+						filter: brightness(0) invert(1);
+					}
+				}
+			}
+
+			.ask-info {
+				margin-top: 28px;
+				text-align: center;
+
+				p {
+					font-family: $font;
+					font-size: 15px;
+					color: #181a20;
+
+					b {
+						margin-left: 6px;
+						color: #2a6cdf;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+
+	/* ===== MY PAGE / PROFILE (mobile) ===== */
+	#my-page.mobile {
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+		padding: 20px 14px 48px;
+		background: #f6f6f6;
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.m-login-gate {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 12px;
+			padding: 60px 16px;
+			text-align: center;
+
+			.m-gate-title {
+				font-family: $font;
+				font-size: 20px;
+				font-weight: 700;
+				color: #181a20;
+			}
+			.m-gate-sub {
+				font-family: $font;
+				font-size: 14px;
+				color: #717171;
+				max-width: 280px;
+			}
+			.m-gate-btn {
+				margin-top: 6px;
+				padding: 12px 28px;
+				border: none;
+				border-radius: 10px;
+				background: #1c4fb3;
+				color: #fff;
+				font-family: $font;
+				font-size: 15px;
+				font-weight: 600;
+				cursor: pointer;
+			}
+		}
+
+		.m-profile {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			width: 100%;
+			padding: 18px;
+			border-radius: 14px;
+			background: #fff;
+			box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+
+			.m-avatar {
+				width: 64px;
+				height: 64px;
+				border-radius: 50%;
+				object-fit: cover;
+				flex-shrink: 0;
+			}
+
+			.m-profile-info {
+				display: flex;
+				flex-direction: column;
+				gap: 3px;
+				min-width: 0;
+
+				.m-name {
+					font-family: $font;
+					font-size: 18px;
+					font-weight: 700;
+					color: #181a20;
+				}
+				.m-type {
+					font-family: $font;
+					font-size: 12px;
+					font-weight: 600;
+					text-transform: uppercase;
+					letter-spacing: 0.4px;
+					color: #1c4fb3;
+				}
+				.m-phone {
+					font-family: $font;
+					font-size: 13px;
+					color: #717171;
+				}
+			}
+		}
+
+		.m-stats {
+			display: flex;
+			gap: 10px;
+			margin-top: 14px;
+
+			.m-stat {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 2px;
+				padding: 14px 6px;
+				border-radius: 12px;
+				background: #fff;
+				box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+
+				b {
+					font-family: $font;
+					font-size: 18px;
+					font-weight: 700;
+					color: #181a20;
+				}
+				span {
+					font-family: $font;
+					font-size: 12px;
+					color: #8a93a6;
+				}
+			}
+		}
+
+		.m-section-title {
+			margin: 22px 0 10px;
+			font-family: $font;
+			font-size: 14px;
+			font-weight: 700;
+			color: #555e70;
+		}
+
+		.m-actions {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 10px;
+
+			.m-action {
+				display: flex;
+				flex-direction: column;
+				gap: 4px;
+				padding: 16px 14px;
+				border-radius: 14px;
+				background: #fff;
+				box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+				cursor: pointer;
+
+				.m-action-icon {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 40px;
+					height: 40px;
+					margin-bottom: 4px;
+					border-radius: 12px;
+					background: rgba(28, 79, 179, 0.1);
+					color: #1c4fb3;
+
+					svg {
+						font-size: 22px;
+					}
+				}
+				.m-action-label {
+					font-family: $font;
+					font-size: 15px;
+					font-weight: 600;
+					color: #181a20;
+				}
+				.m-action-sub {
+					font-family: $font;
+					font-size: 12px;
+					color: #8a93a6;
+				}
+			}
+		}
+
+		.m-list {
+			display: flex;
+			flex-direction: column;
+			border-radius: 14px;
+			background: #fff;
+			box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+			overflow: hidden;
+
+			.m-row {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				padding: 15px 16px;
+				border-bottom: 1px solid #f0f1f4;
+				cursor: pointer;
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				.m-row-icon {
+					display: flex;
+					align-items: center;
+					color: #555e70;
+
+					svg {
+						font-size: 22px;
+					}
+				}
+				.m-row-label {
+					flex: 1;
+					font-family: $font;
+					font-size: 15px;
+					font-weight: 500;
+					color: #181a20;
+				}
+				.m-row-arrow {
+					color: #c2c8d2;
+					font-size: 20px;
+				}
+
+				&.m-logout {
+					.m-row-icon,
+					.m-row-label {
+						color: #e0454b;
+					}
 				}
 			}
 		}

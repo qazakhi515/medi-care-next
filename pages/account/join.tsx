@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { NextPage } from 'next';
-import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import { Box, Button, Checkbox, FormControlLabel, FormGroup, Stack } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
@@ -21,7 +20,6 @@ const LOGIN_BG_IMAGES = ['/img/banner/slyle2.jpg', '/img/banner/style3.jpg', '/i
 
 const Join: NextPage = () => {
 	const router = useRouter();
-	const device = useDeviceDetect();
 	const [input, setInput] = useState({ nick: '', password: '', phone: '', type: 'PATIENT' });
 	const [loginView, setLoginView] = useState<boolean>(true);
 	const [forgotView, setForgotView] = useState<boolean>(false);
@@ -96,9 +94,7 @@ const Join: NextPage = () => {
 
 	console.log('+input: ', input);
 
-	if (device === 'mobile') {
-		return <div>LOGIN MOBILE</div>;
-	} else {
+	{
 		return (
 			<Stack className={'join-page'}>
 				<Stack className={'container'}>

@@ -434,6 +434,30 @@ $mc-card-shadow: 0 10px 30px rgba(47, 51, 39, 0.08);
 			overflow: hidden;
 			margin-top: 36px;
 
+			/* Native horizontal scroll carousel (mobile) — reliable touch/drag */
+			.m-scroll-row {
+				display: flex;
+				flex-direction: row;
+				gap: 16px;
+				width: 100%;
+				max-width: 100%;
+				overflow-x: auto;
+				overflow-y: hidden;
+				scroll-snap-type: x mandatory;
+				padding-bottom: 6px;
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
+
+				.m-scroll-item {
+					flex: 0 0 280px;
+					width: 280px;
+					max-width: 280px;
+					scroll-snap-align: start;
+				}
+			}
+
 			.empty-list {
 				display: flex;
 				align-items: center;
@@ -477,7 +501,7 @@ $mc-card-shadow: 0 10px 30px rgba(47, 51, 39, 0.08);
 	}
 
 	.popular-card-box {
-		width: 304px;
+		width: 100%;
 		background: #ffffff;
 		border: 1px solid $mc-line;
 		border-radius: 16px;
@@ -741,24 +765,25 @@ $mc-card-shadow: 0 10px 30px rgba(47, 51, 39, 0.08);
 
 @media (max-width: 768px) {
 	.medi-hero {
-		min-height: 520px;
+		min-height: 380px;
 
 		.hero-overlay {
 			background: linear-gradient(180deg, rgba(38, 42, 31, 0.55) 0%, rgba(38, 42, 31, 0.8) 100%);
 		}
 
 		.hero-inner {
-			min-height: 520px;
-			padding: 56px 22px;
+			min-height: 380px;
+			padding: 34px 20px;
 		}
 
 		.hero-content {
 			h1 {
-				font-size: 34px;
+				font-size: 30px;
 			}
 
 			p {
-				font-size: 15px;
+				font-size: 14px;
+				margin-bottom: 20px;
 			}
 		}
 
@@ -777,14 +802,37 @@ $mc-card-shadow: 0 10px 30px rgba(47, 51, 39, 0.08);
 
 	#pc-wrap .home-page .quick-nav,
 	#mobile-wrap .home-page .quick-nav {
-		padding: 40px 0;
+		padding: 26px 0;
 
 		.container {
-			padding: 0 22px;
+			gap: 12px;
+			padding: 0 16px;
 		}
 
 		.tile {
-			flex: 1 1 100%;
+			flex: 1 1 calc(50% - 6px);
+			min-width: 0;
+			gap: 10px;
+			padding: 14px 12px;
+
+			.icon {
+				width: 42px;
+				height: 42px;
+
+				svg {
+					font-size: 22px;
+				}
+			}
+
+			.text {
+				strong {
+					font-size: 15px;
+				}
+
+				span {
+					font-size: 11px;
+				}
+			}
 		}
 	}
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useQuery, useLazyQuery, useMutation, useReactiveVar } from '@apollo/client';
@@ -28,7 +27,6 @@ export const getStaticProps = async ({ locale }: any) => ({
 });
 
 const AppointmentPage: NextPage = () => {
-	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
 	const urlDoctorId = router.query?.doctorId as string;
@@ -186,8 +184,6 @@ const AppointmentPage: NextPage = () => {
 			sweetMixinErrorAlert(err.message).then();
 		}
 	};
-
-	if (device === 'mobile') return <h1>APPOINTMENTS MOBILE</h1>;
 
 	const doctorName = (d?: Doctor | null) =>
 		d?.memberData?.memberFullName || d?.memberData?.memberNick || 'Doctor';
@@ -803,6 +799,87 @@ const AppointmentPage: NextPage = () => {
 				}
 				.my-appts {
 					gap: 18px;
+				}
+
+				/* ===== MOBILE ===== */
+				@media (max-width: 768px) {
+					.appointment-page {
+						padding: 24px 12px 60px;
+					}
+					.appt-container {
+						gap: 18px;
+					}
+					.page-title {
+						font-size: 22px;
+					}
+					.wizard-steps {
+						gap: 4px;
+					}
+					.wstep {
+						font-size: 11px;
+						gap: 5px;
+					}
+					.wnum {
+						width: 22px;
+						height: 22px;
+						font-size: 12px;
+					}
+					.wizard-card,
+					.my-appts {
+						padding: 18px 16px;
+						border-radius: 12px;
+					}
+					.wizard-title {
+						font-size: 18px;
+					}
+					.card-head {
+						flex-direction: column;
+						align-items: stretch;
+					}
+					.spec-filter {
+						width: 100%;
+					}
+					.doctor-grid {
+						grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+						gap: 12px;
+					}
+					.doctor-card {
+						padding: 14px;
+					}
+					.doctor-avatar {
+						width: 60px;
+						height: 60px;
+					}
+					.date-input,
+					.text-input {
+						max-width: 100%;
+					}
+					.slot {
+						font-size: 12px;
+						padding: 8px 12px;
+					}
+					.primary-btn {
+						align-self: stretch;
+						text-align: center;
+					}
+					.confirm-box {
+						padding: 14px;
+					}
+					.confirm-row {
+						font-size: 13px;
+					}
+					.appt-card {
+						padding: 20px 18px 18px;
+					}
+					.appt-title {
+						font-size: 20px;
+					}
+					.appt-note {
+						max-width: 100%;
+					}
+					.appt-datebox {
+						max-width: 100%;
+					}
 				}
 			`}</style>
 		</div>

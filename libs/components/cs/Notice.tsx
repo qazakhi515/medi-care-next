@@ -1,10 +1,7 @@
 import React from 'react';
 import { Stack, Box } from '@mui/material';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
 
 const Notice = () => {
-	const device = useDeviceDetect();
-
 	/** APOLLO REQUESTS **/
 	/** LIFECYCLES **/
 	/** HANDLERS **/
@@ -23,9 +20,7 @@ const Notice = () => {
 		},
 	];
 
-	if (device === 'mobile') {
-		return <div>NOTICE MOBILE</div>;
-	} else {
+	{
 		return (
 			<Stack className={'notice-content'}>
 				<span className={'title'}>Notice</span>

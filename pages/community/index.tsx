@@ -3,6 +3,10 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Stack, Tab, Typography, Button, Pagination } from '@mui/material';
+import Moment from 'react-moment';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CommunityCard from '../../libs/components/common/CommunityCard';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
@@ -11,9 +15,10 @@ import { T } from '../../libs/types/common';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { BoardArticlesInquiry } from '../../libs/types/board-article/board-article.input';
 import { BoardArticleCategory } from '../../libs/enums/board-article.enum';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { GET_BOARD_ARTICLES } from '../../apollo/user/query';
-import { Messages } from '../../libs/config';
+import { Messages, REACT_APP_API_URL } from '../../libs/config';
+import { userVar } from '../../apollo/store';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
 import { LIKE_TARGET_BOARD_ARTICLE } from '../../apollo/user/mutation';
 
@@ -26,6 +31,7 @@ export const getStaticProps = async ({ locale }: any) => ({
 const Community: NextPage = ({ initialInput, ...props }: T) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
+	const user = useReactiveVar(userVar);
 	const { query } = router;
 	const articleCategory = query?.articleCategory as string;
 	const [searchCommunity, setSearchCommunity] = useState<BoardArticlesInquiry>(initialInput);
@@ -106,7 +112,122 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 	};
 
 	if (device === 'mobile') {
-		return <h1>COMMUNITY PAGE MOBILE</h1>;
+		const categories = [
+			{ value: 'FREE', label: 'Free Board' },
+			{ value: 'RECOMMEND', label: 'Recommendation' },
+			{ value: 'NEWS', label: 'News' },
+			{ value: 'HUMOR', label: 'Humor' },
+		];
+		const activeCategory = searchCommunity.search.articleCategory;
+		return (
+			<div id="community-list-page" className="mobile">
+				<div className="m-container">
+					<div className="m-head">
+						<img src={'/img/logo/logo.png'} alt="" className="m-logo" />
+						<span className="m-comm-name">Medi-Care Community</span>
+					</div>
+
+					<div className="m-tabs">
+						{categories.map((c) => (
+							<button
+								key={c.value}
+								type="button"
+								className={`m-tab ${activeCategory === c.value ? 'active' : ''}`}
+								onClick={(e) => tabChangeHandler(e, c.value)}
+							>
+								{c.label}
+							</button>
+						))}
+					</div>
+
+					<div className="m-panel-head">
+						<div className="m-panel-title">
+							<p className="m-title">{activeCategory} BOARD</p>
+							<p className="m-sub">Express your opinions freely here without content restrictions</p>
+						</div>
+						<button
+							type="button"
+							className="m-write"
+							onClick={() => router.push({ pathname: '/mypage', query: { category: 'writeArticle' } })}
+						>
+							Write
+						</button>
+					</div>
+
+					<div className="m-list">
+						{totalCount ? (
+							boardArticles?.map((article: BoardArticle) => {
+								const imagePath: string = article?.articleImage
+									? `${REACT_APP_API_URL}/${article?.articleImage}`
+									: '/img/community/backuchun.jpg';
+								const liked = article?.meLiked && article?.meLiked[0]?.myFavorite;
+								return (
+									<div
+										className="m-card"
+										key={article?._id}
+										onClick={() =>
+											router.push(
+												{
+													pathname: '/community/detail',
+													query: { articleCategory: article?.articleCategory, id: article?._id },
+												},
+												undefined,
+												{ shallow: true },
+											)
+										}
+									>
+										<div className="m-card-img">
+											<img src={imagePath} alt="" />
+										</div>
+										<div className="m-card-body">
+											<span className="m-nick">{article?.memberData?.memberNick}</span>
+											<p className="m-card-title">{article?.articleTitle}</p>
+											<div className="m-card-meta">
+												<span className="m-stat">
+													<RemoveRedEyeIcon fontSize="small" /> {article?.articleViews}
+												</span>
+												<span className="m-stat clickable" onClick={(e: any) => likeArticleHandler(e, user, article?._id)}>
+													{liked ? (
+														<FavoriteIcon color="primary" fontSize="small" />
+													) : (
+														<FavoriteBorderIcon fontSize="small" />
+													)}{' '}
+													{article?.articleLikes}
+												</span>
+												<span className="m-date">
+													<Moment format={'MMM DD'}>{article?.createdAt}</Moment>
+												</span>
+											</div>
+										</div>
+									</div>
+								);
+							})
+						) : (
+							<div className={'no-data'}>
+								<img src="/img/icons/icoAlert.svg" alt="" />
+								<p>No Article found!</p>
+							</div>
+						)}
+					</div>
+
+					{totalCount > 0 && (
+						<div className="m-pagination">
+							<Pagination
+								count={Math.ceil(totalCount / searchCommunity.limit)}
+								page={searchCommunity.page}
+								shape="circular"
+								color="primary"
+								size="small"
+								onChange={paginationHandler}
+							/>
+							<Typography className="m-total">
+								Total {totalCount} article{totalCount > 1 ? 's' : ''} available
+							</Typography>
+						</div>
+					)}
+				</div>
+			</div>
+		);
 	} else {
 		return (
 			<div id="community-list-page">

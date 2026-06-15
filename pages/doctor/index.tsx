@@ -59,7 +59,72 @@ const DoctorList: NextPage = ({ initialInput, ...props }: any) => {
 	};
 
 	if (device === 'mobile') {
-		return <h1>DOCTORS PAGE MOBILE</h1>;
+		return (
+			<Stack sx={{ width: '100%', maxWidth: '100%', px: 2, py: 3, boxSizing: 'border-box', overflowX: 'hidden' }}>
+				<Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
+					Our Doctors
+				</Typography>
+
+				<Stack spacing={1.5} sx={{ mb: 3 }}>
+					<Box
+						component="input"
+						placeholder="Search for a doctor"
+						value={searchText}
+						onChange={(e: any) => setSearchText(e.target.value)}
+						onKeyDown={(e: any) => {
+							if (e.key === 'Enter') {
+								setSearchFilter({ ...searchFilter, page: 1, search: { ...searchFilter.search, text: searchText } });
+							}
+						}}
+						sx={{
+							width: '100%',
+							p: '12px 16px',
+							borderRadius: '8px',
+							border: '1px solid #ddd',
+							fontSize: 14,
+							boxSizing: 'border-box',
+						}}
+					/>
+					<Select size="small" defaultValue="ALL" onChange={(e) => specializationHandler(e.target.value)} sx={{ width: '100%' }}>
+						<MenuItem value="ALL">All specializations</MenuItem>
+						{Object.values(Specialization).map((s) => (
+							<MenuItem key={s} value={s}>
+								{s}
+							</MenuItem>
+						))}
+					</Select>
+				</Stack>
+
+				<Stack sx={{ alignItems: 'center', gap: 3 }}>
+					{doctors?.length === 0 ? (
+						<Stack sx={{ width: '100%', alignItems: 'center', py: 6 }}>
+							<img src="/img/icons/icoAlert.svg" alt="" />
+							<p>No Doctors found!</p>
+						</Stack>
+					) : (
+						doctors.map((doctor: Doctor) => <DoctorCard doctor={doctor} key={doctor._id} />)
+					)}
+				</Stack>
+
+				{total > 0 && (
+					<Stack sx={{ mt: 4, alignItems: 'center' }} spacing={2}>
+						{Math.ceil(total / searchFilter.limit) > 1 && (
+							<Pagination
+								page={currentPage}
+								count={Math.ceil(total / searchFilter.limit)}
+								onChange={paginationChangeHandler}
+								shape="circular"
+								color="primary"
+								size="small"
+							/>
+						)}
+						<Typography color="text.secondary" sx={{ fontSize: 14 }}>
+							Total {total} doctor{total > 1 ? 's' : ''} available
+						</Typography>
+					</Stack>
+				)}
+			</Stack>
+		);
 	}
 	return (
 		<Stack sx={{ maxWidth: 1200, margin: '0 auto', py: 5, px: 2 }}>

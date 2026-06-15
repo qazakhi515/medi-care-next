@@ -22,19 +22,25 @@ const HospitalAbout = ({ hospital, doctors }: HospitalAboutProps) => {
 	const description = hospital?.hospitalDesc?.trim();
 
 	return (
-		<div style={{ marginTop: 32 }}>
+		<div className="hospital-about" style={{ marginTop: 32 }}>
 			<div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
 				<InfoOutlinedIcon sx={{ color: '#6b7256' }} />
 				<Typography sx={{ fontSize: 22, fontWeight: 600, color: '#2f3327' }}>About Hospital</Typography>
 			</div>
 
-			<div style={{ background: '#fff', border: '1px solid #e6e8df', borderRadius: 16, padding: 28 }}>
+			<div
+				className="hospital-about-card"
+				style={{ background: '#fff', border: '1px solid #e6e8df', borderRadius: 16, padding: 28 }}
+			>
 				<Typography sx={{ fontSize: 15, lineHeight: 1.7, color: '#3f4536', whiteSpace: 'pre-line' }}>
 					{description || `${hospital?.hospitalTitle || 'This hospital'} has not published a detailed description yet.`}
 				</Typography>
 
 				{/* Doctors subsection */}
-				<div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 32, marginBottom: 4 }}>
+				<div
+					className="hospital-about-docs"
+					style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 32, marginBottom: 4 }}
+				>
 					<MedicalServicesOutlinedIcon sx={{ color: '#6b7256' }} />
 					<Typography sx={{ fontSize: 18, fontWeight: 600, color: '#2f3327' }}>Doctors</Typography>
 				</div>

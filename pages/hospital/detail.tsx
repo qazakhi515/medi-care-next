@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
-import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import { NextPage } from 'next';
 import Review from '../../libs/components/hospital/Review';
@@ -43,7 +42,6 @@ export const getStaticProps = async ({ locale }: any) => ({
 });
 
 const HospitalDetail: NextPage = ({ initialComment, ...props }: any) => {
-	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
 	const [hospitalId, setHospitalId] = useState<string | null>(null);
@@ -201,9 +199,7 @@ const HospitalDetail: NextPage = ({ initialComment, ...props }: any) => {
 		);
 	}
 
-	if (device === 'mobile') {
-		return <div>HOSPITAL DETAIL PAGE</div>;
-	} else {
+	{
 		return (
 			<div id={'hospital-detail-page'}>
 				<div className={'container'}>

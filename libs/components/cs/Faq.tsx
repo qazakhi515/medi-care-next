@@ -4,7 +4,6 @@ import { AccordionDetails, Box, Stack, Typography } from '@mui/material';
 import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
 import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 
 const Accordion = styled((props: AccordionProps) => <MuiAccordion disableGutters elevation={0} square {...props} />)(
@@ -31,7 +30,6 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 }));
 
 const Faq = () => {
-	const device = useDeviceDetect();
 	const router = useRouter();
 	const [category, setCategory] = useState<string>('hospital');
 	const [expanded, setExpanded] = useState<string | false>('panel1');
@@ -433,9 +431,7 @@ const Faq = () => {
 		],
 	};
 
-	if (device === 'mobile') {
-		return <div>FAQ MOBILE</div>;
-	} else {
+	{
 		return (
 			<Stack className={'faq-content'}>
 				<Box className={'categories'} component={'div'}>

@@ -11,7 +11,6 @@ import {
 	Tooltip,
 	IconButton,
 } from '@mui/material';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { HospitalLocation, HospitalType } from '../../enums/hospital.enum';
 import { HospitalsInquiry } from '../../types/hospital/hospital.input';
 import { useRouter } from 'next/router';
@@ -26,7 +25,6 @@ interface FilterType {
 
 const Filter = (props: FilterType) => {
 	const { searchFilter, setSearchFilter, initialInput } = props;
-	const device = useDeviceDetect();
 	const router = useRouter();
 	const [hospitalLocation] = useState<HospitalLocation[]>(Object.values(HospitalLocation));
 	const [hospitalType] = useState<HospitalType[]>(Object.values(HospitalType));
@@ -138,9 +136,7 @@ const Filter = (props: FilterType) => {
 		}
 	};
 
-	if (device === 'mobile') {
-		return <div>HOSPITALS FILTER</div>;
-	} else {
+	{
 		return (
 			<Stack className={'filter-main'}>
 				<Stack className={'find-your-home'} mb={'40px'}>

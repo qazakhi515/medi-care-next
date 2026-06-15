@@ -47,21 +47,15 @@ const PopularHospitals = (props: PopularHospitalsProps) => {
 						<span>Popular Hospitals</span>
 					</Stack>
 					<Stack className={'card-box'}>
-						<Swiper
-							className={'popular-hospital-swiper'}
-							slidesPerView={'auto'}
-							centeredSlides={true}
-							spaceBetween={25}
-							modules={[Autoplay]}
-						>
-							{popularHospitals.map((hospital: Hospital) => {
+						<div className={'m-scroll-row'}>
+							{popularHospitals.slice(0, 4).map((hospital: Hospital) => {
 								return (
-									<SwiperSlide key={hospital._id} className={'popular-hospital-slide'}>
+									<div className={'m-scroll-item'} key={hospital._id}>
 										<PopularHospitalCard hospital={hospital} />
-									</SwiperSlide>
+									</div>
 								);
 							})}
-						</Swiper>
+						</div>
 					</Stack>
 				</Stack>
 			</Stack>

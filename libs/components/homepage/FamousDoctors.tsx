@@ -51,15 +51,13 @@ const FamousDoctors = (props: FamousDoctorsProps) => {
 						{famousDoctors.length === 0 ? (
 							<div className={'empty-list'}>No doctors to show yet</div>
 						) : (
-							<Swiper
-								className={'famous-doctor-swiper'}
-								slidesPerView={'auto'}
-								centeredSlides={true}
-								spaceBetween={24}
-								modules={[Autoplay]}
-							>
-								{cards}
-							</Swiper>
+							<div className={'m-scroll-row'}>
+								{famousDoctors.slice(0, 4).map((doctor: Doctor) => (
+									<div className={'m-scroll-item'} key={doctor._id}>
+										<DoctorCard doctor={doctor} />
+									</div>
+								))}
+							</div>
 						)}
 					</Stack>
 				</Stack>
